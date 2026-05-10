@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finalizar Compra – Mundo Stick</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/finalizar-compra.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="logo">
+      <img src="../img/MundoStick.png" alt="Mundo Stick" class="logo-img">
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <div class="nav-bar">
+    <button class="btn-buscar-nav">BUSCA AQUÍ TUS NUMEROS</button>
+  </div>
+
+  <!-- PAGE CONTENT -->
+  <div class="page-wrap">
+    <h1 class="page-title">Finalizar compra</h1>
+
+    <!-- CART NOTICE -->
+    <div class="cart-notice">
+      <div class="cart-notice-left">
+        <div class="check">✓</div>
+        <span id="cart-notice-text">Stickers añadidos a tu carrito.</span>
+      </div>
+      <button class="btn-ver-carrito" id="btn-ver-carrito">Ver carrito</button>
+    </div>
+
+    <!-- CHECKOUT GRID -->
+    <div class="checkout-grid">
+
+      <!-- LEFT: BILLING -->
+      <div>
+        <div class="billing-title">Detalles de facturación</div>
+
+        <div class="form-row">
+          <div>
+            <label class="field-label">Nombre <span class="req">*</span></label>
+            <input type="text" class="field-input" id="f-nombre" />
+          </div>
+          <div>
+            <label class="field-label">Apellidos <span class="req">*</span></label>
+            <input type="text" class="field-input" id="f-apellido" />
+          </div>
+        </div>
+
+        <div class="form-full">
+          <label class="field-label">Cedula o Numero de Identificacion <span class="req">*</span></label>
+          <input type="text" class="field-input" id="f-cedula" placeholder="Cédula o Número de Identificación" />
+        </div>
+
+        <div class="form-full">
+          <label class="field-label">Dirección de la calle <span class="req">*</span></label>
+          <input type="text" class="field-input" placeholder="Nombre de la calle y número de la casa" />
+        </div>
+
+        <div class="form-full">
+          <label class="field-label">Departamento (opcional)</label>
+          <select class="field-input">
+            <option>Antioquia</option>
+            <option>Atlántico</option>
+            <option>Bogotá D.C.</option>
+            <option>Bolívar</option>
+            <option>Caldas</option>
+            <option>Cundinamarca</option>
+            <option>Nariño</option>
+            <option>Santander</option>
+            <option>Valle del Cauca</option>
+          </select>
+        </div>
+
+        <div class="form-full">
+          <label class="field-label">Teléfono <span class="req">*</span></label>
+          <input type="tel" class="field-input" id="f-telefono" />
+        </div>
+
+        <div class="form-full">
+          <label class="field-label">Dirección de correo electrónico <span class="req">*</span></label>
+          <input type="email" class="field-input" id="f-email" />
+        </div>
+
+        <div class="form-full">
+          <label class="field-label">Confirmar correo electrónico <span class="req">*</span></label>
+          <input type="email" class="field-input" id="f-email2" />
+        </div>
+      </div>
+
+      <!-- RIGHT: ORDER SUMMARY -->
+      <div class="order-box">
+        <div class="order-title">Tu pedido</div>
+
+        <div class="order-header">
+          <span>Producto</span>
+          <span>Subtotal</span>
+        </div>
+
+        <!-- items generados por JS -->
+        <div id="order-items"></div>
+
+        <div class="order-totals">
+          <div class="total-row">
+            <span>Subtotal</span>
+            <span id="order-subtotal">$ 0</span>
+          </div>
+          <div class="total-row grand">
+            <span>Total</span>
+            <span id="order-total">$ 0</span>
+          </div>
+        </div>
+
+        <div class="pse-row">
+          <span class="pse-label">Pago PSE</span>
+          <div class="pse-logo">
+            <a href="/pages/checkout-pse.html"><img src="/img/pse-logo.png" alt="pse-logo" class="pse-logo-img"></a>
+          </div>
+        </div>
+
+        <button class="btn-realizar" id="btn-realizar">Realizar el pedido</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="../img/MundoStick.png" alt="Mundo Stick" class="footer-logo-img">
+      </div>
+      <ul class="footer-contacts">
+        <li>📍 Carrera 90 # 43 - 61</li>
+        <li>📱 +57 305 3255920</li>
+        <li>✉️ ventas@mundostick.com</li>
+        <li>✅ <a href="#">Términos y Condiciones</a></li>
+      </ul>
+    </div>
+    <div class="footer-bar">© MundoStick.com – Todos los derechos reservados</div>
+  </footer>
+
+</body>
+<script src="../js/cart.js"></script>
+<script src="../js/finalizar-compra.js"></script>
+
+</html>

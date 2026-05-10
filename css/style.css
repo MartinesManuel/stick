@@ -1,0 +1,598 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f5f5;
+    color: #111
+}
+
+.header-top {
+    background: #ffffff;
+    padding: 10px 0;
+    text-align: center
+}
+
+.logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 50px;
+    color: #fff;
+    letter-spacing: 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px
+}
+
+.logo span {
+    background: #fff;
+    color: #00b4d8;
+    border-radius: 4px;
+    padding: 0 4px;
+    font-size: 22px
+}
+
+.header-nav {
+    background: #00b4d8;
+    padding: 10px 0;
+    text-align: center
+}
+
+.btn-buscar {
+    background: #e63946;
+    color: #fff;
+    border: none;
+    padding: 10px 28px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 3px;
+    text-transform: uppercase
+}
+
+.btn-buscar:hover {
+    background: #c1121f
+}
+
+.main-section {
+    background: #fff;
+    padding: 30px 20px;
+    max-width: 900px;
+    margin: 0 auto
+}
+
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start
+}
+
+@media(max-width:600px) {
+    .two-col {
+        grid-template-columns: 1fr
+    }
+}
+
+.slider-box {
+    background: #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    height: 280px;
+    cursor: pointer
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #555;
+    font-weight: 500;
+    background: linear-gradient(135deg, #c8e6c9, #a5d6a7)
+}
+
+.slide.active {
+    display: flex
+}
+
+.slide-img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #2d6a4f, #74c69d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px
+}
+
+.slide-img-placeholder .emoji {
+    font-size: 60px
+}
+
+.slide-img-placeholder p {
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, .3)
+}
+
+.dots {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .5);
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, .8)
+}
+
+.dot.active {
+    background: #fff
+}
+
+.product-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 8px
+}
+
+.product-subtitle {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    color: #00b4d8;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 6px
+}
+
+.product-tagline {
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 12px;
+    color: #333
+}
+
+.stickers-bendecidos {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    color: #00b4d8;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 14px;
+    text-transform: uppercase
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px
+}
+
+.day-card {
+    border: 2.5px solid #111;
+    border-radius: 4px;
+    padding: 8px;
+    background: #fff
+}
+
+.day-card.wide {
+    grid-column: span 2
+}
+
+.day-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 6px
+}
+
+.day-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    font-size: 9px;
+    font-weight: 700;
+    text-align: center;
+    color: #555;
+    margin-bottom: 4px;
+    text-transform: uppercase
+}
+
+.day-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px
+}
+
+.day-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px
+}
+
+.moto-icon {
+    font-size: 24px
+}
+
+.day-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #e63946;
+    font-style: italic;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.1
+}
+
+.day-prize {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #111;
+    text-align: center
+}
+
+.price-section {
+    text-align: center;
+    margin-top: 8px
+}
+
+.flying-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #00b4d8;
+    text-transform: uppercase;
+    margin-bottom: 2px
+}
+
+.big-price {
+    font-family: 'Oswald', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #00b4d8;
+    -webkit-text-stroke: 2px #111;
+    margin-bottom: 8px
+}
+
+.progress-bar-wrap {
+    background: #e0e0e0;
+    border-radius: 10px;
+    height: 14px;
+    overflow: hidden;
+    margin-bottom: 4px
+}
+
+.progress-bar {
+    background: #2dc653;
+    height: 100%;
+    border-radius: 10px;
+    width: 0%;
+    transition: width 1.5s ease
+}
+
+.progress-label {
+    font-size: 11px;
+    color: #888
+}
+
+.progress-label-NUM {
+    font-size: 11px;
+    color: #000000;
+    font-weight: 600;
+}
+
+.buy-section {
+    background: #1a2a4a;
+    padding: 40px 20px
+}
+
+.buy-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 24px
+}
+
+.packages {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr 1fr;
+    gap: 16px;
+    max-width: 750px;
+    margin: 0 auto 30px
+}
+
+@media(max-width:550px) {
+    .packages {
+        grid-template-columns: 1fr
+    }
+}
+
+.pkg-card {
+    background: #2a3a5a;
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    position: relative;
+    border: 2px solid transparent
+}
+
+.pkg-card.featured {
+    background: #fff;
+    border: 3px solid #2dc653
+}
+
+.badge-best {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background: #2dc653;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 0 10px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px
+}
+
+.pkg-qty {
+    font-family: 'Oswald', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px
+}
+
+.pkg-card.featured .pkg-qty {
+    color: #111
+}
+
+.pkg-label {
+    font-size: 11px;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px
+}
+
+.pkg-card.featured .pkg-label {
+    color: #555
+}
+
+.price-box {
+    background: #111;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 8px
+}
+
+.pkg-price {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffd60a
+}
+
+.pkg-price-plain {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff
+}
+
+.pkg-currency {
+    font-size: 11px;
+    color: #aaa;
+    margin-bottom: 10px
+}
+
+.pkg-card.featured .pkg-currency {
+    color: #555
+}
+
+.pkg-note {
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 14px;
+    line-height: 1.5
+}
+
+.btn-pkg {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 1px;
+    border: 2px solid #fff;
+    background: transparent;
+    color: #fff;
+    text-decoration: none;
+
+}
+
+.btn-pkg:hover {
+    background: rgba(255, 255, 255, .1)
+}
+
+.btn-pkg-dark {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 1px;
+    border: none;
+    background: #111;
+    color: #fff
+}
+
+.btn-pkg-dark:hover {
+    background: #222
+}
+
+.more-section {
+    background: #1a2a4a;
+    padding: 0 20px 40px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, .1)
+}
+
+.more-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 16px
+}
+
+.more-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px
+}
+
+.qty-input {
+    width: 60px;
+    padding: 8px;
+    text-align: center;
+    border: 2px solid #aaa;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 700;
+    background: #fff
+}
+
+.btn-more {
+    background: #2dc653;
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+
+
+.btn-more:hover {
+    background: #239a43
+}
+
+footer {
+    background: #00b4d8;
+    padding: 24px 20px 8px
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto
+}
+
+.footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: #fff;
+    letter-spacing: 2px
+}
+
+.footer-contacts {
+    list-style: none;
+    font-size: 12px;
+    color: #fff
+}
+
+.footer-contacts li {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.footer-bar {
+    background: #ffffff;
+    color: #747474;
+    text-align: center;
+    font-size: 11px;
+    padding: 8px 0;
+    margin-top: 16px
+}
+
+
+.logo-img {
+    height: 44px;
+    object-fit: contain;
+    display: inline-block;
+    vertical-align: middle
+}
+
+/* Slider con imágenes reales */
+.slide img.slide-real-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block
+}
+
+/* Imagen combo en lugar del days-grid */
+.combo-img-wrap {
+    margin-bottom: 16px;
+    text-align: center
+}
+
+.combo-img-wrap img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 6px;
+    display: block;
+    margin: 0 auto
+}

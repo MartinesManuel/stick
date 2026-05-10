@@ -1,0 +1,47 @@
+/* ══════════════════════════════════════
+   Buscar Números – Mundo Stick
+   ══════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; background: #fff; color: #111; min-height: 100vh; display: flex; flex-direction: column; }
+
+.site-header { background: #fff; padding: 22px 20px 18px; text-align: center; border-bottom: 1px solid #eee; }
+.logo { display: inline-flex; align-items: center; gap: 10px; }
+.logo-img { height: 50px; object-fit: contain; }
+
+.nav-bar { background: #00b4d8; padding: 14px 20px; text-align: center; }
+.btn-buscar-nav { background: #e63946; color: #fff; border: none; padding: 12px 36px; font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; border-radius: 3px; }
+.btn-buscar-nav:hover { background: #c1121f; }
+
+.main-content { flex: 1; padding: 60px 40px 80px; max-width: 1100px; width: 100%; margin: 0 auto; }
+.page-title { font-family: 'Montserrat', sans-serif; font-size: 48px; font-weight: 900; color: #1565c0; text-align: center; margin-bottom: 60px; text-transform: uppercase; }
+
+.search-form { display: flex; align-items: flex-end; gap: 20px; max-width: 100%; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 14px; font-weight: 600; color: #222; white-space: nowrap; }
+.form-group label .req { color: #e63946; margin-left: 2px; }
+.form-group.label-col { min-width: 160px; flex-shrink: 0; }
+
+.search-input-wrap { flex: 1; }
+.search-input-wrap input { width: 100%; height: 44px; border: 1.5px solid #bbb; border-radius: 4px; padding: 0 12px; font-size: 15px; font-family: 'Open Sans', sans-serif; outline: none; transition: border-color .2s; }
+.search-input-wrap input:focus { border-color: #1565c0; }
+
+.btn-buscar-en { background: #1565c0; color: #fff; border: none; padding: 0 24px; height: 44px; font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; border-radius: 4px; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+.btn-buscar-en:hover { background: #0d47a1; }
+
+footer { background: #5bc8e2; padding: 30px 40px 0; }
+.footer-inner { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; max-width: 1000px; margin: 0 auto; padding-bottom: 24px; }
+.footer-logo-img { height: 50px; object-fit: contain; filter: brightness(0) invert(1); }
+.footer-contacts { list-style: none; font-size: 13px; color: #fff; text-align: right; }
+.footer-contacts li { margin-bottom: 6px; display: flex; align-items: center; justify-content: flex-end; gap: 7px; }
+.footer-contacts a { color: #fff; text-decoration: none; }
+.footer-contacts a:hover { text-decoration: underline; }
+.footer-bar { background: #fff; text-align: center; font-size: 12px; color: #555; padding: 10px 0; margin-top: 0; border-top: 1px solid rgba(0,0,0,.08); }
+
+@media (max-width: 640px) {
+  .page-title { font-size: 28px; }
+  .search-form { flex-direction: column; align-items: stretch; }
+  .form-group.label-col { min-width: unset; }
+  .footer-inner { flex-direction: column; }
+  .footer-contacts { text-align: left; }
+  .footer-contacts li { justify-content: flex-start; }
+}

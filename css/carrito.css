@@ -1,0 +1,39 @@
+/* ══════════════════════════════════════
+   Carrito – Mundo Stick
+   ══════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; background: #fff; color: #111; min-height: 100vh; display: flex; flex-direction: column; }
+
+.site-header { background: #fff; padding: 20px; text-align: center; border-bottom: 1px solid #eee; }
+.logo { display: inline-flex; align-items: center; gap: 10px; }
+.logo-img { height: 50px; object-fit: contain; }
+
+.nav-bar { background: #00b4d8; padding: 14px 20px; text-align: center; }
+.btn-buscar-nav { background: #e63946; color: #fff; border: none; padding: 12px 36px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; border-radius: 3px; }
+.btn-buscar-nav:hover { background: #c1121f; }
+
+.main-content { flex: 1; padding: 40px 40px 80px; max-width: 1100px; width: 100%; margin: 0 auto; }
+.page-title { font-family: 'Open Sans', sans-serif; font-size: 22px; font-weight: 700; color: #111; margin-bottom: 50px; }
+
+.empty-cart { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 20px 60px; gap: 16px; }
+.sad-face { width: 90px; height: 90px; background: #1a2a4a; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+.sad-face svg { width: 50px; height: 50px; fill: #fff; }
+.empty-text { font-size: 15px; color: #333; font-weight: 600; text-align: center; }
+.dots-row { display: flex; gap: 20px; }
+.dots-row span { width: 6px; height: 6px; background: #bbb; border-radius: 50%; display: block; }
+.nuevo-tienda { font-family: 'Open Sans', sans-serif; font-size: 24px; font-weight: 700; color: #1a2a4a; margin-top: 14px; }
+
+footer { background: #5bc8e2; padding: 28px 40px 0; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; max-width: 1000px; margin: 0 auto; padding-bottom: 24px; }
+.footer-logo-img { height: 50px; object-fit: contain; filter: brightness(0) invert(1); }
+.footer-contacts { list-style: none; font-size: 13px; color: #fff; text-align: right; }
+.footer-contacts li { margin-bottom: 6px; display: flex; align-items: center; justify-content: flex-end; gap: 7px; }
+.footer-contacts a { color: #fff; text-decoration: none; }
+.footer-bar { background: #fff; text-align: center; font-size: 12px; color: #555; padding: 10px 0; border-top: 1px solid rgba(0,0,0,.08); }
+
+@media(max-width:600px) {
+  .main-content { padding: 30px 16px 60px; }
+  .footer-inner { flex-direction: column; }
+  .footer-contacts { text-align: left; }
+  .footer-contacts li { justify-content: flex-start; }
+}

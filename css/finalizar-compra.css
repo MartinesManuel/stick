@@ -1,0 +1,423 @@
+/* ══════════════════════════════════════
+   Finalizar Compra – Mundo Stick
+   ══════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: #fff;
+  color: #111;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: #fff;
+  padding: 22px 20px 18px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  height: 50px;
+  object-fit: contain;
+}
+
+/* ── NAV BAR ── */
+.nav-bar {
+  background: #00b4d8;
+  padding: 14px 20px;
+  text-align: center;
+}
+
+.btn-buscar-nav {
+  background: #e63946;
+  color: #fff;
+  border: none;
+  padding: 12px 36px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.btn-buscar-nav:hover {
+  background: #c1121f;
+}
+
+/* ── PAGE WRAPPER ── */
+.page-wrap {
+  flex: 1;
+  padding: 30px 40px 60px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 28px;
+}
+
+/* ── CART NOTICE ── */
+.cart-notice {
+  background: #f0f7ff;
+  border-left: 4px solid #1565c0;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-radius: 2px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.cart-notice-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #333;
+  flex: 1;
+}
+
+.cart-notice-left .check {
+  width: 22px;
+  height: 22px;
+  background: #1565c0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.btn-ver-carrito {
+  background: #1565c0;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-ver-carrito:hover {
+  background: #0d47a1;
+}
+
+/* ── TWO COLUMN LAYOUT ── */
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ── BILLING FORM ── */
+.billing-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1.5px solid #1565c0;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-full {
+  margin-bottom: 16px;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #222;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.field-label .req {
+  color: #e63946;
+  margin-left: 2px;
+}
+
+.field-input {
+  width: 100%;
+  height: 42px;
+  border: 1.5px solid #ccc;
+  border-radius: 4px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  outline: none;
+  transition: border-color .2s;
+  background: #fff;
+}
+
+.field-input:focus {
+  border-color: #1565c0;
+}
+
+.field-input::placeholder {
+  color: #aaa;
+}
+
+select.field-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+/* ── ORDER SUMMARY ── */
+.order-box {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 24px;
+  background: #fff;
+}
+
+.order-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 20px;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #111;
+  margin-bottom: 14px;
+}
+
+.order-header span {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111;
+}
+
+.order-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  gap: 8px;
+}
+
+.order-row:last-of-type {
+  border-bottom: none;
+}
+
+.order-row .prod-name {
+  font-size: 13px;
+  color: #333;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.order-row .prod-price {
+  font-size: 13px;
+  color: #333;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.order-totals {
+  border-top: 1px solid #ddd;
+  margin-top: 4px;
+  padding-top: 10px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.total-row span {
+  font-size: 13px;
+  color: #333;
+}
+
+.total-row.grand span {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+}
+
+.pse-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 18px 0 16px;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+}
+
+.pse-label {
+  font-size: 13px;
+  color: #333;
+  font-weight: 600;
+}
+
+.pse-logo {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, .4);
+}
+
+.pse-logo-img {
+  width: 54px;
+  height: 54px;
+  cursor: pointer;
+}
+
+.btn-realizar {
+  width: 100%;
+  padding: 14px;
+  background: #1565c0;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: .5px;
+}
+
+.btn-realizar:hover {
+  background: #0d47a1;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #5bc8e2;
+  padding: 30px 40px 0;
+  margin-top: 60px;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-bottom: 24px;
+}
+
+.footer-logo-img {
+  height: 50px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.footer-contacts {
+  list-style: none;
+  font-size: 13px;
+  color: #fff;
+  text-align: right;
+}
+
+.footer-contacts li {
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.footer-contacts a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-contacts a:hover {
+  text-decoration: underline;
+}
+
+.footer-bar {
+  background: #fff;
+  text-align: center;
+  font-size: 12px;
+  color: #555;
+  padding: 10px 0;
+  border-top: 1px solid rgba(0, 0, 0, .08);
+}
+
+@media (max-width: 768px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-wrap {
+    padding: 20px 16px 40px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+  }
+
+  .footer-contacts {
+    text-align: left;
+  }
+
+  .footer-contacts li {
+    justify-content: flex-start;
+  }
+}

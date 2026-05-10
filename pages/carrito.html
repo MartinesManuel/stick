@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito – Mundo Stick</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/carrito.css">
+  <style>
+    /* ── tabla del carrito ── */
+    .cart-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+    .cart-table th { font-size: 12px; font-weight: 700; text-transform: uppercase;
+      color: #555; border-bottom: 2px solid #111; padding: 8px 6px; text-align: left; }
+    .cart-table td { font-size: 13px; padding: 12px 6px; border-bottom: 1px solid #eee; vertical-align: middle; }
+    .btn-remove { background: none; border: 1.5px solid #e63946; color: #e63946;
+      border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 11px;
+      display: inline-flex; align-items: center; justify-content: center; }
+    .btn-remove:hover { background: #e63946; color: #fff; }
+    .cart-totals { text-align: right; margin-bottom: 20px; }
+    .cart-totals p { font-size: 14px; color: #333; margin-bottom: 4px; }
+    .cart-totals .grand-total { font-size: 18px; font-weight: 700; color: #1a2a4a; }
+    .btn-checkout-wrap { text-align: right; }
+    .btn-checkout { background: #1565c0; color: #fff; border: none; padding: 12px 32px;
+      font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700;
+      border-radius: 5px; cursor: pointer; text-transform: uppercase; }
+    .btn-checkout:hover { background: #0d47a1; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">
+    <img src="../img/MundoStick.png" alt="Mundo Stick" class="logo-img">
+  </div>
+</header>
+
+<div class="nav-bar">
+  <button class="btn-buscar-nav">BUSCA AQUÍ TUS NUMEROS</button>
+</div>
+
+<main class="main-content">
+  <h1 class="page-title">Carrito</h1>
+
+  <!-- Estado vacío -->
+  <div id="cart-empty" class="empty-cart">
+    <div class="sad-face">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="22" cy="24" r="4" fill="#fff"/>
+        <circle cx="42" cy="24" r="4" fill="#fff"/>
+        <ellipse cx="22" cy="34" rx="2.5" ry="4" fill="#5bc8e2"/>
+        <path d="M20 46 Q32 38 44 46" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="empty-text">¡Tu carrito está actualmente vacío!</div>
+    <div class="dots-row"><span></span><span></span><span></span></div>
+    <div class="nuevo-tienda">Nuevo en la tienda</div>
+  </div>
+
+  <!-- Estado con productos (renderizado por JS) -->
+  <div id="cart-filled" style="display:none">
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th style="text-align:center">Cantidad</th>
+          <th style="text-align:right">Precio unit.</th>
+          <th style="text-align:right">Subtotal</th>
+          <th style="text-align:center"></th>
+        </tr>
+      </thead>
+      <tbody id="cart-tbody"></tbody>
+    </table>
+
+    <div class="cart-totals">
+      <p>Subtotal: <strong id="cart-subtotal">$0</strong></p>
+      <p class="grand-total">Total: <strong id="cart-total">$0</strong></p>
+    </div>
+
+    <div class="btn-checkout-wrap">
+      <button class="btn-checkout" id="btn-checkout">Finalizar compra →</button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="../img/MundoStick.png" alt="Mundo Stick" class="footer-logo-img">
+    </div>
+    <ul class="footer-contacts">
+      <li>📍 Carrera 90 # 43 - 61</li>
+      <li>📱 +57 305 3255920</li>
+      <li>✉️ ventas@mundostick.com</li>
+      <li>✅ <a href="#">Términos y Condiciones</a></li>
+    </ul>
+  </div>
+  <div class="footer-bar">© MundoStick.com – Todos los derechos reservados</div>
+</footer>
+
+<script src="../js/cart.js"></script>
+<script src="../js/carrito.js"></script>
+</body>
+</html>
