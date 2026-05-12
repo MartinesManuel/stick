@@ -1,154 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mundo Stick – Donde cada sticker cuenta una historia</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600;700;900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Suspendida</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+        }
+        
+        .pulse-slow {
+            animation: pulse-slow 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .shake {
+            animation: shake 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        
+        .glow-red {
+            filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.5));
+        }
+        
+        .stripe {
+            background: repeating-linear-gradient(
+                45deg,
+                #fbbf24,
+                #fbbf24 10px,
+                #1f2937 10px,
+                #1f2937 20px
+            );
+        }
+    </style>
 </head>
-
-<body>
-
-  <div class="header-top">
-    <div class="logo">
-      <img src="img/MundoStick.png" alt="Mundo Stick" class="logo-img">
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4 overflow-hidden relative">
+    
+    <!-- Decorative elements -->
+    <div class="absolute top-10 left-10 opacity-10">
+        <svg class="w-32 h-32 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
     </div>
-  </div>
-  <div class="header-nav">
-    <a href="pages/buscar-numeros.html">
-      <button class="btn-buscar">Busca Aquí Tus Numeros</button>
-    </a>
-  </div>
-
-  <div style="background:#fff;padding:30px 16px">
-    <div class="two-col" style="max-width:860px;margin:0 auto">
-      <div>
-        <div class="slider-box" id="slider">
-          <div class="slide active">
-            <img src="img/1.jpg" alt="Combo 8 Mayo - Slide 1" class="slide-real-img">
-          </div>
-          <div class="slide">
-            <img src="img/2.jpg" alt="Combo 8 Mayo - Slide 2" class="slide-real-img">
-          </div>
-          <div class="slide">
-            <img src="img/3.jpg" alt="Combo 8 Mayo - Slide 3" class="slide-real-img">
-          </div>
-          <div class="slide">
-            <img src="img/4.jpg" alt="Combo 8 Mayo - Slide 4" class="slide-real-img">
-          </div>
-          <div class="slide">
-            <img src="img/5.jpg" alt="Combo 8 Mayo - Slide 5" class="slide-real-img">
-          </div>
-          <div class="slider-arrow arrow-left" onclick="prevSlide()">&#10094;</div>
-          <div class="slider-arrow arrow-right" onclick="nextSlide()">&#10095;</div>
-          <div class="dots">
-            <div class="dot active" onclick="goSlide(0)"></div>
-            <div class="dot" onclick="goSlide(1)"></div>
-            <div class="dot" onclick="goSlide(2)"></div>
-            <div class="dot" onclick="goSlide(3)"></div>
-            <div class="dot" onclick="goSlide(4)"></div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div class="product-title">STICKERS COMBO FAMILIAR</div>
-        <div class="product-subtitle">APARTAMENTO AMONLADO +MAZDA CX30 GT LX<br>HIBRIDA + 100M</div>
-        <div class="product-tagline">Lo más Exclusivo Siempre!</div>
-        <div class="stickers-bendecidos">⭐ STICKERS BENDECIDOS ⭐</div>
-
-        <!-- Imagen del combo reemplazando el days-grid -->
-        <a href="#compra">
-          <div class="combo-img-wrap">
-            <img src="img/combo.png" alt="Combo 8 de Mayo - Premios por día">
-          </div>
-        </a>
-
-        <div class="price-section">
-          <div class="flying-text">¡SE VA VOLANDO!</div>
-          <div class="big-price">$3.000</div>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar" id="prog">
-              <div class="progress-label-NUM">82.97% </div>
+    <div class="absolute bottom-10 right-10 opacity-10">
+        <svg class="w-40 h-40 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+    </div>
+    
+    <!-- Main content -->
+    <div class="max-w-3xl w-full">
+        
+        <!-- Warning stripe top -->
+        <div class="stripe h-3 rounded-t-lg"></div>
+        
+        <div class="bg-gray-900/90 backdrop-blur-sm border-x-4 border-yellow-500 p-8 md:p-12 text-center">
+            
+            <!-- Main SVG Icon -->
+            <div class="flex justify-center mb-8">
+                <div class="relative float">
+                    <!-- Wallet with X -->
+                    <svg class="w-40 h-40 md:w-52 md:h-52 glow-red" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Wallet body -->
+                        <rect x="15" y="35" width="75" height="55" rx="8" fill="#374151" stroke="#4B5563" stroke-width="3"/>
+                        <!-- Wallet flap -->
+                        <path d="M15 50C15 43.3726 20.3726 38 27 38H83C86.3137 38 89 40.6863 89 44V50H15Z" fill="#4B5563"/>
+                        <!-- Card slot -->
+                        <rect x="60" y="55" width="25" height="18" rx="3" fill="#1F2937" stroke="#374151" stroke-width="2"/>
+                        <!-- Coin circle -->
+                        <circle cx="95" cy="45" r="20" fill="#FBBF24" stroke="#F59E0B" stroke-width="3"/>
+                        <!-- Dollar sign on coin -->
+                        <text x="95" y="52" text-anchor="middle" fill="#92400E" font-size="20" font-weight="bold">$</text>
+                        <!-- Big red X -->
+                        <g class="shake" style="transform-origin: 60px 60px;">
+                            <circle cx="60" cy="65" r="28" fill="#DC2626" opacity="0.9"/>
+                            <path d="M48 53L72 77M72 53L48 77" stroke="white" stroke-width="6" stroke-linecap="round"/>
+                        </g>
+                    </svg>
+                </div>
             </div>
-          </div>
-          <div class="progress-label"> Compra nuestros stickers y sorpréndete</div>
+            
+            <!-- Main message -->
+            <div class="space-y-6">
+                <div class="inline-block bg-red-600/20 border-2 border-red-500 rounded-lg px-6 py-2 mb-4">
+                    <span class="text-red-400 font-bold text-sm md:text-base tracking-wider uppercase pulse-slow">⚠️ Aviso Importante ⚠️</span>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-black text-white leading-tight">
+                    PÁGINA <span class="text-red-500">SUSPENDIDA</span>
+                </h1>
+                
+                <div class="bg-gradient-to-r from-transparent via-gray-700 to-transparent h-px my-6"></div>
+                
+                <h2 class="text-2xl md:text-3xl font-bold text-yellow-400">
+                    Por Falta de Pago
+                </h2>
+                
+                <p class="text-gray-300 text-lg md:text-xl max-w-xl mx-auto leading-relaxed">
+                    Este sitio web ha sido <span class="text-red-400 font-semibold">dado de baja</span> debido a que existen 
+                    <span class="text-yellow-400 font-semibold">pagos pendientes</span> sin resolver.
+                </p>
+                
+                <!-- Info box -->
+                <div class="bg-gray-800/50 border border-gray-700 rounded-xl p-6 mt-8 max-w-lg mx-auto">
+                    <div class="flex items-center justify-center gap-3 mb-4">
+                        <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-yellow-500 font-semibold">¿Eres el propietario?</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Contacta con el administrador para regularizar tu situación y restaurar el acceso a tu sitio web.
+                    </p>
+                </div>
+                
+                <!-- Contact button -->
+                <div class="mt-8">
+                    <a href="mailto:contacto@ejemplo.com" class="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg shadow-yellow-500/25">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Contactar Soporte
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="buy-section" id="compra">
-    <div class="buy-title">ADQUIÉRELOS</div>
-    <div class="packages">
-      <div class="pkg-card">
-        <div class="pkg-qty">x10</div>
-        <div class="pkg-label">Darse la oportunidad</div>
-        <div class="pkg-price-plain">$30.000</div>
-        <div class="pkg-currency">Pesos Colombianos</div>
-        <a href="pages/finalizar-compra.html?qty=10&price=25000&combo=1">
-          <button class="btn-pkg">Comprar Stickers</button>
-        </a>
-      </div>
-      <div class="pkg-card featured">
-        <div class="badge-best">Lo Mejor</div>
-        <div class="pkg-qty">x20</div>
-        <div class="pkg-label">¡La Mejor!</div>
-        <div class="price-box">
-          <div class="pkg-price">$60.000</div>
-          <div class="pkg-currency">Pesos Colombianos</div>
+        
+        <!-- Warning stripe bottom -->
+        <div class="stripe h-3 rounded-b-lg"></div>
+        
+        <!-- Footer -->
+        <div class="text-center mt-6">
+            <p class="text-gray-500 text-sm">
+                © 2026 - Sistema de Gestión de Pagos
+            </p>
         </div>
-        <div class="pkg-note">Si compras más de 20 Sticker tienes la posibilidad de ser bendecido con el Combo + 300M
-        </div>
-        <a href="pages/finalizar-compra.html?qty=20&price=50000&combo=1">
-          <button class="btn-pkg-dark">Comprar Stickers</button>
-        </a>
-      </div>
-      <div class="pkg-card">
-        <div class="pkg-qty">x30</div>
-        <div class="pkg-label">¡Una Gran Bendición!</div>
-        <div class="pkg-price-plain">$90.000</div>
-        <div class="pkg-currency">Pesos Colombianos</div>
-        <a href="pages/finalizar-compra.html?qty=40&price=100000&combo=1">
-          <button class="btn-pkg">Comprar Stickers</button>
-        </a>
-      </div>
     </div>
-  </div>
-
-  <div class="more-section">
-    <div class="more-title">SI DESEAS MÁS</div>
-    <div class="more-row">
-      <input type="number" class="qty-input" value="1" min="1" id="qty">
-      <a href="pages/finalizar-compra.html?qty=1&price=2500&combo=0" class="btn-more" id="link-more">
-        🛒 Comprar Más Stickers
-      </a>
+    
+    <!-- Floating warning icons -->
+    <div class="absolute top-1/4 left-5 opacity-20 hidden md:block">
+        <svg class="w-16 h-16 text-red-500 float" style="animation-delay: -2s;" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+        </svg>
     </div>
-  </div>
-
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-logo">
-        <img src="img/MundoStick.png" alt="Mundo Stick"
-          style="height:50px;object-fit:contain;filter:brightness(0) invert(1);">
-      </div>
-      <ul class="footer-contacts">
-        <li>📍 Carrera 90 # 43 - 51</li>
-        <li>📱 +57 305 3255920</li>
-        <li>✉️ ventas@mundostick.com</li>
-        <li>✅ <a href="#" style="color:#fff">Términos y Condiciones</a></li>
-      </ul>
+    <div class="absolute bottom-1/4 right-5 opacity-20 hidden md:block">
+        <svg class="w-20 h-20 text-yellow-500 float" style="animation-delay: -4s;" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+        </svg>
     </div>
-    <div class="footer-bar">© MundoStick.com – Todos los derechos reservados</div>
-  </footer>
-
-  <script src="js/cart.js"></script>
-  <script src="js/config.js"></script>
-  <script src="js/mundostick.js"></script>
+    
 </body>
-
 </html>
