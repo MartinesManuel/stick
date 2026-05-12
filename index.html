@@ -3,176 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Suspendida</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Página Suspendida - Falta de Pago</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .gradient-bg {
+            min-height: 100vh;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
         }
-        
-        .pulse-slow {
-            animation: pulse-slow 3s ease-in-out infinite;
-        }
-        
-        @keyframes pulse-slow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        .float {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .shake {
-            animation: shake 0.5s ease-in-out infinite;
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
-        }
-        
-        .glow-red {
-            filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.5));
-        }
-        
-        .stripe {
+
+        .warning-stripe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 12px;
             background: repeating-linear-gradient(
                 45deg,
-                #fbbf24,
-                #fbbf24 10px,
-                #1f2937 10px,
-                #1f2937 20px
+                #f59e0b,
+                #f59e0b 20px,
+                #1f2937 20px,
+                #1f2937 40px
             );
+        }
+
+        .warning-stripe-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: repeating-linear-gradient(
+                -45deg,
+                #f59e0b,
+                #f59e0b 20px,
+                #1f2937 20px,
+                #1f2937 40px
+            );
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .icon-container {
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .icon-container svg {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: clamp(0.7rem, 2.5vw, 0.875rem);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .highlight {
+            color: #f59e0b;
+            display: block;
+        }
+
+        .message {
+            color: #94a3b8;
+            font-size: clamp(0.95rem, 3vw, 1.15rem);
+            line-height: 1.7;
+            margin-bottom: 35px;
+            padding: 0 10px;
+        }
+
+        .info-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-box p {
+            color: #fbbf24;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .info-box svg {
+            flex-shrink: 0;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #1f2937;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(245, 158, 11, 0.5);
+        }
+
+        .footer-text {
+            margin-top: 40px;
+            color: #4b5563;
+            font-size: clamp(0.75rem, 2vw, 0.85rem);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .icon-container svg {
+                max-width: 150px;
+            }
+
+            .status-badge {
+                padding: 6px 16px;
+                letter-spacing: 1px;
+            }
+
+            .info-box {
+                padding: 15px;
+            }
+
+            .contact-btn {
+                padding: 12px 28px;
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .warning-stripe,
+            .warning-stripe-bottom {
+                height: 15px;
+            }
+
+            .container {
+                padding: 40px 30px;
+            }
         }
     </style>
 </head>
-<body class="gradient-bg min-h-screen flex items-center justify-center p-4 overflow-hidden relative">
-    
-    <!-- Decorative elements -->
-    <div class="absolute top-10 left-10 opacity-10">
-        <svg class="w-32 h-32 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-        </svg>
-    </div>
-    <div class="absolute bottom-10 right-10 opacity-10">
-        <svg class="w-40 h-40 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-        </svg>
-    </div>
-    
-    <!-- Main content -->
-    <div class="max-w-3xl w-full">
-        
-        <!-- Warning stripe top -->
-        <div class="stripe h-3 rounded-t-lg"></div>
-        
-        <div class="bg-gray-900/90 backdrop-blur-sm border-x-4 border-yellow-500 p-8 md:p-12 text-center">
-            
-            <!-- Main SVG Icon -->
-            <div class="flex justify-center mb-8">
-                <div class="relative float">
-                    <!-- Wallet with X -->
-                    <svg class="w-40 h-40 md:w-52 md:h-52 glow-red" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Wallet body -->
-                        <rect x="15" y="35" width="75" height="55" rx="8" fill="#374151" stroke="#4B5563" stroke-width="3"/>
-                        <!-- Wallet flap -->
-                        <path d="M15 50C15 43.3726 20.3726 38 27 38H83C86.3137 38 89 40.6863 89 44V50H15Z" fill="#4B5563"/>
-                        <!-- Card slot -->
-                        <rect x="60" y="55" width="25" height="18" rx="3" fill="#1F2937" stroke="#374151" stroke-width="2"/>
-                        <!-- Coin circle -->
-                        <circle cx="95" cy="45" r="20" fill="#FBBF24" stroke="#F59E0B" stroke-width="3"/>
-                        <!-- Dollar sign on coin -->
-                        <text x="95" y="52" text-anchor="middle" fill="#92400E" font-size="20" font-weight="bold">$</text>
-                        <!-- Big red X -->
-                        <g class="shake" style="transform-origin: 60px 60px;">
-                            <circle cx="60" cy="65" r="28" fill="#DC2626" opacity="0.9"/>
-                            <path d="M48 53L72 77M72 53L48 77" stroke="white" stroke-width="6" stroke-linecap="round"/>
-                        </g>
-                    </svg>
-                </div>
-            </div>
-            
-            <!-- Main message -->
-            <div class="space-y-6">
-                <div class="inline-block bg-red-600/20 border-2 border-red-500 rounded-lg px-6 py-2 mb-4">
-                    <span class="text-red-400 font-bold text-sm md:text-base tracking-wider uppercase pulse-slow">⚠️ Aviso Importante ⚠️</span>
-                </div>
+<body>
+    <div class="warning-stripe"></div>
+    <div class="warning-stripe-bottom"></div>
+
+    <div class="container">
+        <div class="icon-container">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Wallet base -->
+                <rect x="30" y="60" width="140" height="100" rx="12" fill="#374151" stroke="#4b5563" stroke-width="3"/>
+                <rect x="30" y="60" width="140" height="30" rx="12" fill="#4b5563"/>
                 
-                <h1 class="text-4xl md:text-6xl font-black text-white leading-tight">
-                    PÁGINA <span class="text-red-500">SUSPENDIDA</span>
-                </h1>
+                <!-- Wallet flap -->
+                <path d="M30 75 Q30 60 45 60 L155 60 Q170 60 170 75 L170 90 L30 90 Z" fill="#525b6b"/>
                 
-                <div class="bg-gradient-to-r from-transparent via-gray-700 to-transparent h-px my-6"></div>
+                <!-- Money slot -->
+                <rect x="110" y="100" width="50" height="35" rx="6" fill="#1f2937" stroke="#374151" stroke-width="2"/>
                 
-                <h2 class="text-2xl md:text-3xl font-bold text-yellow-400">
-                    Por Falta de Pago
-                </h2>
+                <!-- Coins -->
+                <circle cx="70" cy="120" r="20" fill="#f59e0b" stroke="#d97706" stroke-width="3"/>
+                <text x="70" y="126" text-anchor="middle" fill="#92400e" font-size="18" font-weight="bold">$</text>
                 
-                <p class="text-gray-300 text-lg md:text-xl max-w-xl mx-auto leading-relaxed">
-                    Este sitio web ha sido <span class="text-red-400 font-semibold">dado de baja</span> debido a que existen 
-                    <span class="text-yellow-400 font-semibold">pagos pendientes</span> sin resolver.
-                </p>
+                <!-- Red X overlay -->
+                <g class="pulse">
+                    <circle cx="140" cy="50" r="35" fill="#dc2626" stroke="#ffffff" stroke-width="3"/>
+                    <path d="M125 35 L155 65 M155 35 L125 65" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+                </g>
                 
-                <!-- Info box -->
-                <div class="bg-gray-800/50 border border-gray-700 rounded-xl p-6 mt-8 max-w-lg mx-auto">
-                    <div class="flex items-center justify-center gap-3 mb-4">
-                        <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
-                        </svg>
-                        <span class="text-yellow-500 font-semibold">¿Eres el propietario?</span>
-                    </div>
-                    <p class="text-gray-400 text-sm">
-                        Contacta con el administrador para regularizar tu situación y restaurar el acceso a tu sitio web.
-                    </p>
-                </div>
-                
-                <!-- Contact button -->
-                <div class="mt-8">
-                    <a href="mailto:contacto@ejemplo.com" class="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg shadow-yellow-500/25">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                        </svg>
-                        Contactar Soporte
-                    </a>
-                </div>
-            </div>
+                <!-- Cobwebs for abandoned effect -->
+                <path d="M25 65 Q15 55 25 45" stroke="#6b7280" stroke-width="1" fill="none" opacity="0.5"/>
+                <path d="M20 70 Q10 60 20 50" stroke="#6b7280" stroke-width="1" fill="none" opacity="0.3"/>
+                <path d="M175 65 Q185 55 175 45" stroke="#6b7280" stroke-width="1" fill="none" opacity="0.5"/>
+            </svg>
         </div>
-        
-        <!-- Warning stripe bottom -->
-        <div class="stripe h-3 rounded-b-lg"></div>
-        
-        <!-- Footer -->
-        <div class="text-center mt-6">
-            <p class="text-gray-500 text-sm">
-                © 2026 - Sistema de Gestión de Pagos
+
+        <span class="status-badge">Servicio Suspendido</span>
+
+        <h1>
+            Esta página ha sido
+            <span class="highlight">TUMBADA POR FALTA DE PAGO</span>
+        </h1>
+
+        <p class="message">
+            El servicio de hosting de este sitio web ha sido suspendido debido a pagos pendientes. 
+            Para restaurar el acceso, el propietario debe regularizar su situación de pago lo antes posible.
+        </p>
+
+        <div class="info-box">
+            <p>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                Si eres el propietario, contacta inmediatamente para evitar la eliminación permanente del contenido.
             </p>
         </div>
+
+        <a href="mailto:pagos@ejemplo.com" class="contact-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            Contactar para Regularizar
+        </a>
+
+        <p class="footer-text">
+            Referencia: #SUS-2024 | Fecha de suspensión: Pendiente de pago
+        </p>
     </div>
-    
-    <!-- Floating warning icons -->
-    <div class="absolute top-1/4 left-5 opacity-20 hidden md:block">
-        <svg class="w-16 h-16 text-red-500 float" style="animation-delay: -2s;" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-        </svg>
-    </div>
-    <div class="absolute bottom-1/4 right-5 opacity-20 hidden md:block">
-        <svg class="w-20 h-20 text-yellow-500 float" style="animation-delay: -4s;" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-        </svg>
-    </div>
-    
 </body>
 </html>
