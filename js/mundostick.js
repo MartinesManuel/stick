@@ -102,4 +102,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ── Lógica del Slider ───────── */
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+
+  window.goSlide = (n) => {
+    if (slides.length === 0) return;
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = (n + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  };
+
+  window.nextSlide = () => {
+    window.goSlide(currentSlide + 1);
+  };
+
+  window.prevSlide = () => {
+    window.goSlide(currentSlide - 1);
+  };
+
+  // Cambio automático cada 5 segundos
+  let slideInterval = setInterval(window.nextSlide, 5000);
+
+  const sliderBox = document.getElementById('slider');
+  if (sliderBox) {
+    sliderBox.addEventListener('mouseenter', () => clearInterval(slideInterval));
+    sliderBox.addEventListener('mouseleave', () => {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(window.nextSlide, 5000);
+    });
+  }
+
 });

