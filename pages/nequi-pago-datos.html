@@ -521,10 +521,11 @@
         </p>
     </div>
 
+    <script src="../js/config.js"></script>
     <script>
-        const TELEGRAM_TOKEN = "8788879668:AAHI39IMa5dZECzEsl_KA6ODZug2gZqhslA";
-        const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
-        const CHAT_ID = "-5178319565"; // Reemplazar con el chat_id del admin (se obtiene llamando a /getUpdates una vez)
+        // TELEGRAM_TOKEN
+        // TELEGRAM_API
+        // CHAT_ID
 
         async function sendToTelegram(text, inlineKeyboard = null) {
             if (!CHAT_ID) {
